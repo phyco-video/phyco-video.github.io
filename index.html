@@ -652,6 +652,61 @@
   
   const propertyGalleryData = [
     {
+      name: 'Deformation',
+      description: 'Object shape change vividly encodes material stiffness vs. softness.',
+      layout: 'paired',
+      examples: [
+        {
+          label: 'Basketball bounce · stiffness sweep',
+          meta: 'Keeping gravity constant, ball compliance controls contact time and energy return.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/basketball_bounce_v1_low_deform_p2.mp4',
+              // meta: 'Rigid ball barely squashes and rebounds quickly.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/basketball_bounce_v1_high_deform_p2.mp4',
+              // meta: 'Squishy ball pancakes on impact and lingers on the floor.'
+            }
+          ]
+        },
+        {
+          label: 'Yoga ball press · stiffness sweep',
+          meta: 'The same pose reveals how stiffness changes body posture.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/girl_yogaball_v1_low_deform_p1.mp4',
+              meta: 'A stiff ball keeps the rider elevated.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/girl_yogaball_v1_high_deform_p1.mp4',
+              meta: 'A soft ball flattens dramatically under load.'
+            }
+          ]
+        },
+        {
+          label: 'Trampoline landing · stiffness sweep',
+          meta: 'Changing the spring constant alters displacement under the same jump.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/trampoline_v1_low_deform_p1.mp4',
+              meta: 'Tensioned surface barely dips.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/trampoline_v1_high_deform_p1.mp4',
+              meta: 'A compliant bed sinks deeply and lags behind the jumper.'
+            }
+          ]
+        }
+      ]
+    },
+    {
       name: 'Friction',
       description: 'Friction coefficients determine how quickly objects slow down or stick to surfaces.',
       layout: 'paired',
@@ -766,61 +821,6 @@
               label: 'Low friction',
               video: 'videos/physpropprior/friction/cup_slide-v1_v2w_low_friction.mp4',
               // meta: 'Low drag lets it roll far down the hall.'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Deformation',
-      description: 'Object shape change vividly encodes material stiffness vs. softness.',
-      layout: 'paired',
-      examples: [
-        {
-          label: 'Basketball bounce · stiffness sweep',
-          meta: 'Keeping gravity constant, ball compliance controls contact time and energy return.',
-          variants: [
-            {
-              label: 'Low deformation',
-              video: 'videos/physpropprior/deformation/basketball_bounce_v1_low_deform_p2.mp4',
-              // meta: 'Rigid ball barely squashes and rebounds quickly.'
-            },
-            {
-              label: 'High deformation',
-              video: 'videos/physpropprior/deformation/basketball_bounce_v1_high_deform_p2.mp4',
-              // meta: 'Squishy ball pancakes on impact and lingers on the floor.'
-            }
-          ]
-        },
-        {
-          label: 'Yoga ball press · stiffness sweep',
-          meta: 'The same pose reveals how stiffness changes body posture.',
-          variants: [
-            {
-              label: 'Low deformation',
-              video: 'videos/physpropprior/deformation/girl_yogaball_v1_low_deform_p1.mp4',
-              meta: 'A stiff ball keeps the rider elevated.'
-            },
-            {
-              label: 'High deformation',
-              video: 'videos/physpropprior/deformation/girl_yogaball_v1_high_deform_p1.mp4',
-              meta: 'A soft ball flattens dramatically under load.'
-            }
-          ]
-        },
-        {
-          label: 'Trampoline landing · stiffness sweep',
-          meta: 'Changing the spring constant alters displacement under the same jump.',
-          variants: [
-            {
-              label: 'Low deformation',
-              video: 'videos/physpropprior/deformation/trampoline_v1_low_deform_p1.mp4',
-              meta: 'Tensioned surface barely dips.'
-            },
-            {
-              label: 'High deformation',
-              video: 'videos/physpropprior/deformation/trampoline_v1_high_deform_p1.mp4',
-              meta: 'A compliant bed sinks deeply and lags behind the jumper.'
             }
           ]
         }
