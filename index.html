@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PhyCo: Learning Controllable Physical Priors for Generative Motion">
+  <meta name="keywords" content="Generative Motion, Physical Priors, Controllable Properties">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhyCo: Learning Controllable Physical Priors for Generative Motion</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 500;
+    }
+    
+    .hero {
+      background-color: #f5f5f5;
+      padding: 1rem 0;
+    }
+    
+    .section {
+      padding: 1.5rem 0.5rem;
+    }
+    
+    .site-content {
+      width: 90%;
+      margin: 0 auto;
+    }
+    
+    .container.is-fluid {
+      padding: 0 0.5rem;
+    }
+    
+    .example-container {
+      margin-bottom: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    
+    .example-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    
+    .explanation-text {
+      background-color: #f8f9fa;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.05rem 0 0.05rem 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      /* border-left: 4px solid #3273dc; */
+    }
+    
+    .video-container {
+      margin-top: 1rem;
+    }
+    
+    .columns {
+      margin: 0 !important;
+    }
+    
+    .column {
+      padding: 0.5rem;
+    }
+    
+    .video-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .column-heading {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      text-align: center;
+      color: #3273dc;
+    }
+    
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 0;
+      padding-bottom: 50%;
+      overflow: hidden;
+      margin: 0 auto 0.5rem;
+    }
+    
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #000;
+      border-radius: 4px;
+    }
+    
+    .title.is-3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    .speed-control {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 1rem;
+      vertical-align: middle;
+    }
+    
+    .speed-control label {
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    
+    .speed-slider {
+      width: 100px;
+      margin-right: 0.5rem;
+    }
+    
+    .speed-value {
+      font-weight: bold;
+      min-width: 3em;
+      text-align: left;
+    }
+    
+    .abstract {
+      background-color: #f9f9f9;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      color: #666;
+    }
+    
+    .instructions {
+      background-color: #f0f8ff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .property-gallery .example-header {
+      margin-bottom: 1rem;
+    }
+    
+    .property-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .property-panel {
+      border-top: 1px solid #e5e5e5;
+      padding-top: 1.5rem;
+    }
+    
+    .property-panel:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    
+    .property-panel h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+    }
+    
+    .property-panel small {
+      color: #666;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    
+    .thumbnail-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0.5rem auto 1rem;
+      max-width: 780px;
+      padding: 0.5rem 0.75rem;
+      background: #f9fbff;
+      border-radius: 999px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    
+    .carousel-button {
+      border: none;
+      background: #e0e9fb;
+      color: #1d4f91;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    
+    .carousel-button:hover {
+      background: #c5d6fb;
+      transform: translateY(-1px);
+    }
+    
+    .carousel-button:disabled {
+      opacity: 0.4;
+      cursor: default;
+      transform: none;
+    }
+    
+    .thumbnail-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-width: 0;
+      flex: 1;
+      padding: 0 0.25rem;
+    }
+    
+    .thumbnail-track.is-shifting {
+      animation-duration: 0.35s;
+      animation-timing-function: ease;
+    }
+    
+    .thumbnail-track.is-shifting-left {
+      animation-name: carousel-shift-left;
+    }
+    
+    .thumbnail-track.is-shifting-right {
+      animation-name: carousel-shift-right;
+    }
+    
+    .thumbnail-card {
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 0.35rem;
+      background: #f7f9fc;
+      width: 135px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      opacity: 0.7;
+    }
+    
+    .thumbnail-card.current {
+      border-color: #00b4d8;
+      box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+      background: #fff;
+      transform: scale(1.05);
+      opacity: 1;
+      cursor: default;
+    }
+    
+    .thumbnail-card.thumbnail-error {
+      border-color: #ff6b6b;
+    }
+    
+    .thumbnail-card span {
+      display: block;
+      font-size: 0.8rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+    
+    .thumbnail-image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #e9ecef;
+      position: relative;
+      height: 0;
+      padding-bottom: 62%;
+    }
+    
+    .thumbnail-image canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .thumbnail-card.loading::after {
+      content: "Generating preview…";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      color: #666;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.25rem 0.45rem;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    
+    @keyframes carousel-shift-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-35%);
+      }
+    }
+    
+    @keyframes carousel-shift-right {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(35%);
+      }
+    }
+    
+    .property-active-media {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-bottom: 0.75rem;
+      width: 100%;
+    }
+    
+    .model-heading-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      color: #4a5f82;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+    
+    .model-heading {
+      flex: 1 1 220px;
+      max-width: 260px;
+      text-align: center;
+      padding: 0.15rem 0;
+    }
+    
+    .variant-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0.85rem;
+      width: 100%;
+      position: relative;
+    }
+    
+    .variant-row.has-badge {
+      padding-left: 0;
+      gap: 0.75rem;
+    }
+    
+    .variant-badge-column {
+      flex: 0 0 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .variant-badge {
+      display: inline-block;
+      transform: rotate(-90deg);
+      background: #fff;
+      padding: 0.3rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid #d0d8f0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #1d4f91;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    
+    .variant-row.is-hidden {
+      display: none;
+    }
+    
+    .variant-row-label {
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      color: #1d4f91;
+      margin: 0 0 0.15rem 0;
+      letter-spacing: 0.01em;
+    }
+    
+    .variant-row.has-badge .variant-row-label {
+      display: none;
+    }
+    
+    .variant-row-meta {
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #5a6b8c;
+      margin: 0.15rem 0 0;
+    }
+    
+    .variant-row-meta.is-hidden {
+      display: none;
+    }
+    
+    .comparison-video {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1 1 210px;
+      max-width: 250px;
+      gap: 0.2rem;
+    }
+    
+    .comparison-video.baseline,
+    .comparison-video.primary {
+      flex: 1 1 220px;
+      max-width: 260px;
+    }
+    
+    .comparison-video .video-label {
+      display: none;
+    }
+    
+    .property-video {
+      width: 100%;
+    }
+    
+    .property-video-wrapper {
+      padding-bottom: 56%;
+      border-radius: 12px;
+      background: #000;
+      max-width: 260px;
+      margin: 0 auto 0.35rem;
+    }
+    
+    .property-extra {
+      width: 100%;
+      max-width: 200px;
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .property-extra img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #fff;
+      object-fit: contain;
+      max-height: 160px;
+    }
+    
+    .property-extra-label {
+      font-size: 0.8rem;
+      margin-top: 0.35rem;
+      text-align: center;
+      color: #444;
+    }
+    
+    .property-meta {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: -0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .interaction-banner {
+      background: linear-gradient(90deg, #e3f2fd, #f0f8ff);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+      color: #1d4f91;
+      margin: 0.5rem 0 0.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    
+    .property-shared-info {
+      text-align: center;
+      margin: 0.5rem auto 0.75rem;
+      max-width: 720px;
+    }
+    
+    .property-shared-label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.15rem;
+    }
+    
+    .property-shared-meta {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
+
+    /* Adjustments for larger screens */
+    @media screen and (min-width: 1408px) {
+      .container.is-fluid {
+        max-width: 100% !important;
+      }
+      
+      .video-wrapper {
+        padding-bottom: 85%; /* Taller videos on larger screens */
+      }
+    }
+    
+    /* Fix for mobile */
+    @media screen and (max-width: 768px) {
+      .columns.is-mobile {
+        display: block;
+      }
+      
+      .column.is-3 {
+        width: 100%;
+      }
+      
+      .example-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .speed-control {
+        margin: 0.5rem 0 0 0;
+      }
+      
+      .property-active-media {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .thumbnail-carousel {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    
+      .thumbnail-track {
+        width: 100%;
+      }
+    
+      .thumbnail-card {
+        width: 70%;
+      }
+    
+      .comparison-video.baseline,
+      .property-extra {
+        max-width: 70%;
+        flex: 1 1 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-fluid">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PhyCo: Learning Controllable Physical Priors for Generative Motion</h1>
+          
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+                <span class="link-block">
+                <a href="./appendix.pdf" target="_blank" class="button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary PDF</span>
+                </a>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section site-content">
+  <div class="container is-fluid">
+    <!-- Abstract Section -->
+    <!-- <div class="abstract">
+      <h2 class="title is-4">Abstract</h2>
+      <p>
+      </p>
+    </div> -->
+    
+    <div class="example-container property-gallery">
+      <div class="example-header" >
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Generated Outputs with Controllable Physical Properties</h2>
+      </div>
+      <!-- <div class="explanation-text">
+        <p>
+        </p>
+      </div> -->
+      <div id="property-panels" class="property-panels"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const DEFAULT_VIDEO_SPEED = 0.9;
+  const BASELINE_MODELS = [
+    { key: 'cogvideox5B', label: 'CogVideoX-5B' },
+    { key: 'cosmos2B', label: 'Cosmos-2B' }
+  ];
+  
+  const propertyGalleryData = [
+    {
+      name: 'Friction',
+      description: 'Friction coefficients determine how quickly objects slow down or stick to surfaces.',
+      layout: 'paired',
+      examples: [
+        {
+          label: 'Couch slides with a person',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/couch_slide-v2_v2w_high_friction.mp4',
+              // meta: 'With high drag the basket stops within a step.'
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/couch_slide-v2_v2w_low_friction.mp4',
+              // meta: 'Low drag lets it roll far down the hall.'
+            }
+          ]
+        },
+        {
+          label: 'Cube slides on a sandpaper',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/sandpaper_cube_slide_v2w_high_friction.mp4',
+              // meta: 'With high drag the basket stops within a step.'
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/sandpaper_cube_slide_v2w_low_friction.mp4',
+              // meta: 'Low drag lets it roll far down the hall.'
+            }
+          ]
+        },
+        {
+          label: 'Banana slide · ramp sweep',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/banana_slide-v1_v2w_high_friction.mp4',
+              // meta: 'High μ clamps the banana almost immediately.'
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/banana_slide-v1_v2w_low_friction.mp4',
+              // meta: 'Low μ lets it coast across the full ramp.'
+            }
+          ]
+        },
+        {
+          label: 'Laundry basket · hallway push',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/laundrybasket1_v2w_high_friction.mp4',
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/laundrybasket1_v2w_low_friction.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Empty couch slide',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/couch_slide-v1_v2w_high_friction.mp4',
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/couch_slide-v1_v2w_low_friction.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Potted plant slides',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/plant_slide-v2_v2w_high_friction.mp4',
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/plant_slide-v2_v2w_low_friction.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Cart rolls',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/cart_roll_v1_v2w_high_friction.mp4',
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/cart_roll_v1_v2w_low_friction.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Cup slides',
+          // meta: 'Holding the same impulse constant, surface friction determines travel distance.',
+          variants: [
+            {
+              label: 'High friction',
+              video: 'videos/physpropprior/friction/cup_slide-v1_v2w_high_friction.mp4',
+              // meta: 'With high drag the basket stops within a step.'
+            },
+            {
+              label: 'Low friction',
+              video: 'videos/physpropprior/friction/cup_slide-v1_v2w_low_friction.mp4',
+              // meta: 'Low drag lets it roll far down the hall.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Deformation',
+      description: 'Object shape change vividly encodes material stiffness vs. softness.',
+      layout: 'paired',
+      examples: [
+        {
+          label: 'Basketball bounce · stiffness sweep',
+          meta: 'Keeping gravity constant, ball compliance controls contact time and energy return.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/basketball_bounce_v1_low_deform_p2.mp4',
+              // meta: 'Rigid ball barely squashes and rebounds quickly.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/basketball_bounce_v1_high_deform_p2.mp4',
+              // meta: 'Squishy ball pancakes on impact and lingers on the floor.'
+            }
+          ]
+        },
+        {
+          label: 'Yoga ball press · stiffness sweep',
+          meta: 'The same pose reveals how stiffness changes body posture.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/girl_yogaball_v1_low_deform_p1.mp4',
+              meta: 'A stiff ball keeps the rider elevated.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/girl_yogaball_v1_high_deform_p1.mp4',
+              meta: 'A soft ball flattens dramatically under load.'
+            }
+          ]
+        },
+        {
+          label: 'Trampoline landing · stiffness sweep',
+          meta: 'Changing the spring constant alters displacement under the same jump.',
+          variants: [
+            {
+              label: 'Low deformation',
+              video: 'videos/physpropprior/deformation/trampoline_v1_low_deform_p1.mp4',
+              meta: 'Tensioned surface barely dips.'
+            },
+            {
+              label: 'High deformation',
+              video: 'videos/physpropprior/deformation/trampoline_v1_high_deform_p1.mp4',
+              meta: 'A compliant bed sinks deeply and lags behind the jumper.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Restitution',
+      description: 'The coefficient of restitution controls how bouncy an interaction is.',
+      layout: 'paired',
+      examples: [
+        {
+          label: 'Ping pong roll · bounce sweep',
+          meta: 'Higher restitution preserves energy across impacts, lower values damp quickly.',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_low_bounce.mp4',
+              meta: 'Energy dissipates in a couple of contacts.'
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_high_bounce.mp4',
+              meta: 'Ball keeps rebounding down the lane.'
+            }
+          ]
+        },
+        {
+          label: 'Rubber duck drop · bounce sweep',
+          meta: 'Changing restitution alone makes the duck either thud or spring back.',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/rubber_duck1_v2w_low_bounce_p2.mp4',
+              meta: 'Inelastic contact sticks to the surface.'
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/rubber_duck1_v2w_high_bounce_p2.mp4',
+              meta: 'Elastic contact snaps the duck upward.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Force',
+      description: 'Changing both magnitude and direction of the applied force modifies trajectories and contact events.',
+      extraImageLabel: 'Input force direction',
+      examples: [
+        {
+          label: 'Toy car · 0.51N @ 1°',
+          video: 'videos/physpropprior/force/_toycar4_v2w_force_051_angle_1.mp4',
+          extraImage: 'videos/physpropprior/force/_toycar4_v2w_force_051_angle_1_force.png',
+          // meta: 'Higher force pushes the car straight ahead.'
+        },
+        {
+          label: 'Toy car · 0.20N @ 225°',
+          video: 'videos/physpropprior/force/_toycar1_v2w_force_020_angle_225.mp4',
+          extraImage: 'videos/physpropprior/force/_toycar1_v2w_force_020_angle_225_force.png',
+          // meta: 'Smaller impulse + diagonal action.'
+        },
+        {
+          // label: 'Banana slide · 0.95N @ 315°',
+          video: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315.mp4',
+          extraImage: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315_force.png',
+          meta: 'Large impulse with backward/right push.'
+        },
+        {
+          // label: 'Bell · 0.51N @ 271°',
+          video: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271.mp4',
+          extraImage: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271_force.png',
+          meta: 'Impulse aimed downward to slow the swing.'
+        },
+        {
+          label: 'Curling · 0.51N @ 269°',
+          video: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269.mp4',
+          extraImage: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269_force.png',
+          meta: 'Sideways push alters the stone curl.'
+        },
+        {
+          label: 'Cart roll · 0.90N @ 1°',
+          video: 'videos/physpropprior/force/cart_roll_v1_v2w_force_090_angle_1.mp4',
+          extraImage: 'videos/physpropprior/force/cart_roll_v1_v2w_force_090_angle_1_force.png',
+          meta: 'High magnitude straight-on push.'
+        }
+      ]
+    }
+  ];
+  
+  function createThumbnailFromVideo(src, canvas, button, frameTime) {
+    if (!canvas) {
+      return;
+    }
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    video.src = src;
+    video.muted = true;
+    video.playsInline = true;
+    
+    const drawFrame = () => {
+      const context = canvas.getContext('2d');
+      const aspect = video.videoWidth && video.videoHeight ? video.videoWidth / video.videoHeight : (16 / 9);
+      const targetWidth = 320;
+      const targetHeight = targetWidth / aspect;
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      context.drawImage(video, 0, 0, targetWidth, targetHeight);
+      if (button) {
+        button.classList.remove('loading');
+      }
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    };
+    
+    let frameCaptured = false;
+    
+    video.addEventListener('loadedmetadata', () => {
+      let seekTime = typeof frameTime === 'number' ? frameTime : 0.15;
+      if (video.duration && seekTime > video.duration) {
+        seekTime = Math.max(0, video.duration - 0.1);
+      }
+      video.currentTime = seekTime;
+    });
+    
+    video.addEventListener('seeked', () => {
+      if (frameCaptured) {
+        return;
+      }
+      frameCaptured = true;
+      drawFrame();
+    });
+    video.addEventListener('error', () => {
+      if (button) {
+        button.classList.remove('loading');
+        button.classList.add('thumbnail-error');
+      }
+      video.removeAttribute('src');
+    });
+  }
+  
+  function buildPropertyGallery() {
+    const container = document.getElementById('property-panels');
+    if (!container) {
+      return;
+    }
+    
+    propertyGalleryData.forEach(property => {
+      const panel = document.createElement('div');
+      panel.className = 'property-panel';
+      panel.innerHTML = `
+        <h3><b>${property.name}</b></h3>
+        <small>${property.description || ''}</small>
+        <div class="property-active-media"></div>
+        <div class="property-shared-info">
+          <!-- <p class="property-shared-label"></p> -->
+          <p class="property-shared-meta"></p>
+        </div>
+        <div class="thumbnail-carousel">
+          <button class="carousel-button is-left" aria-label="Previous example">
+            <span class="icon"><i class="fas fa-chevron-left"></i></span>
+          </button>
+          <div class="thumbnail-track"></div>
+          <button class="carousel-button is-right" aria-label="Next example">
+            <span class="icon"><i class="fas fa-chevron-right"></i></span>
+          </button>
+        </div>
+      `;
+      
+      container.appendChild(panel);
+      
+      const activeMedia = panel.querySelector('.property-active-media');
+      const sharedLabel = panel.querySelector('.property-shared-label');
+      const sharedMeta = panel.querySelector('.property-shared-meta');
+      const carouselTrack = panel.querySelector('.thumbnail-track');
+      const prevButton = panel.querySelector('.carousel-button.is-left');
+      const nextButton = panel.querySelector('.carousel-button.is-right');
+      const propertySlug = (property.slug || property.name || '').toLowerCase().replace(/\s+/g, '');
+      const layoutMode = property.layout === 'paired' ? 'paired' : 'single';
+      const variantRowCount = layoutMode === 'paired' ? 2 : 1;
+      const variantRows = [];
+      
+      const modelHeadingRow = document.createElement('div');
+      modelHeadingRow.className = 'model-heading-row';
+      BASELINE_MODELS.forEach(model => {
+        const heading = document.createElement('div');
+        heading.className = 'model-heading';
+        heading.textContent = model.label;
+        modelHeadingRow.appendChild(heading);
+      });
+      const phycoHeading = document.createElement('div');
+      phycoHeading.className = 'model-heading';
+      phycoHeading.textContent = 'PhyCo';
+      modelHeadingRow.appendChild(phycoHeading);
+      activeMedia.appendChild(modelHeadingRow);
+      
+      const createVariantRow = (rowIndex, options = {}) => {
+        const { includeExtra = false } = options;
+        const row = document.createElement('div');
+        row.className = 'variant-row';
+        let badgeEl = null;
+        if (layoutMode === 'paired') {
+          row.classList.add('has-badge');
+          const badgeColumn = document.createElement('div');
+          badgeColumn.className = 'variant-badge-column';
+          badgeEl = document.createElement('div');
+          badgeEl.className = 'variant-badge';
+          badgeColumn.appendChild(badgeEl);
+          row.appendChild(badgeColumn);
+        }
+        
+        const shouldShowRowLabel = layoutMode === 'paired';
+        const rowLabel = shouldShowRowLabel ? document.createElement('p') : null;
+        if (rowLabel) {
+          rowLabel.className = 'variant-row-label';
+          row.appendChild(rowLabel);
+        }
+        
+        const baselineRefs = BASELINE_MODELS.map(model => {
+          const column = document.createElement('div');
+          column.className = 'comparison-video baseline';
+          
+          const labelEl = document.createElement('p');
+          labelEl.className = 'video-label';
+          labelEl.textContent = model.label;
+          column.appendChild(labelEl);
+          
+          const wrapper = document.createElement('div');
+          wrapper.className = 'video-wrapper baseline-video-wrapper';
+          
+          const video = document.createElement('video');
+          video.controls = true;
+          video.preload = 'metadata';
+          video.playsInline = true;
+          video.autoplay = true;
+          video.muted = true;
+          video.loop = true;
+          video.setAttribute('aria-label', `${model.label} baseline preview`);
+          video.dataset.model = model.key;
+          video.dataset.row = String(rowIndex);
+          const source = document.createElement('source');
+          source.type = 'video/mp4';
+          video.appendChild(source);
+          wrapper.appendChild(video);
+          
+          column.appendChild(wrapper);
+          row.appendChild(column);
+          
+          return { key: model.key, element: video, source, labelEl };
+        });
+        
+        const phycoColumn = document.createElement('div');
+        phycoColumn.className = 'comparison-video property-video primary';
+        const phycoLabel = document.createElement('p');
+        phycoLabel.className = 'video-label';
+        phycoLabel.textContent = 'PhyCo';
+        const phycoWrapper = document.createElement('div');
+        phycoWrapper.className = 'video-wrapper property-video-wrapper';
+        const phycoVideo = document.createElement('video');
+        phycoVideo.controls = true;
+        phycoVideo.preload = 'metadata';
+        phycoVideo.playsInline = true;
+        phycoVideo.autoplay = true;
+        phycoVideo.muted = true;
+        phycoVideo.loop = true;
+        const phycoSource = document.createElement('source');
+        phycoSource.type = 'video/mp4';
+        phycoVideo.appendChild(phycoSource);
+        phycoWrapper.appendChild(phycoVideo);
+        phycoColumn.appendChild(phycoLabel);
+        phycoColumn.appendChild(phycoWrapper);
+        row.appendChild(phycoColumn);
+        
+        let extraBox = null;
+        let extraImage = null;
+        let extraLabel = null;
+        if (includeExtra) {
+          extraBox = document.createElement('div');
+          extraBox.className = 'comparison-video property-extra is-hidden';
+          extraImage = document.createElement('img');
+          extraLabel = document.createElement('p');
+          extraLabel.className = 'property-extra-label';
+          extraBox.appendChild(extraImage);
+          extraBox.appendChild(extraLabel);
+          row.appendChild(extraBox);
+        }
+        
+        const variantMeta = document.createElement('p');
+        variantMeta.className = 'variant-row-meta is-hidden';
+        row.appendChild(variantMeta);
+        
+        return {
+          container: row,
+          labelEl: rowLabel,
+          metaEl: variantMeta,
+          phycoLabelEl: phycoLabel,
+          phycoVideo,
+          phycoSource,
+          baselineRefs,
+          badgeEl,
+          extraBox,
+          extraImage,
+          extraLabel
+        };
+      };
+      
+      for (let rowIdx = 0; rowIdx < variantRowCount; rowIdx += 1) {
+        const rowConfig = createVariantRow(rowIdx, {
+          includeExtra: layoutMode === 'single' && !!property.extraImageLabel && rowIdx === 0
+        });
+        variantRows.push(rowConfig);
+        activeMedia.appendChild(rowConfig.container);
+      }
+      
+      const previewCache = property.examples.map(() => null);
+      let currentIndex = 0;
+      let isAnimating = false;
+      
+      const getExampleLabel = (example, idx) => {
+        if (example && typeof example.label === 'string' && example.label.trim().length > 0) {
+          return example.label.trim();
+        }
+        const variantLabel = Array.isArray(example?.variants) && example.variants[0] && example.variants[0].label;
+        if (variantLabel) {
+          return variantLabel;
+        }
+        const baseName = property.name || 'Sample';
+        return `${baseName} #${idx + 1}`;
+      };
+      
+      const getVariantEntries = (example) => {
+        if (Array.isArray(example?.variants) && example.variants.length) {
+          return example.variants;
+        }
+        return [{
+          label: example?.variantLabel || example?.label,
+          video: example?.video,
+          meta: example?.variantMeta,
+          extraImage: example?.extraImage,
+          extraImageLabel: example?.extraImageLabel || property.extraImageLabel
+        }];
+      };
+      
+      const getPreviewVideoSrc = (example) => {
+        if (!example) {
+          return '';
+        }
+        if (typeof example.previewVideo === 'string') {
+          return example.previewVideo;
+        }
+        const variants = getVariantEntries(example);
+        if (variants.length && variants[0].video) {
+          return variants[0].video;
+        }
+        return example.video || '';
+      };
+      
+      const getOffsets = () => {
+        const total = property.examples.length;
+        if (!total) {
+          return [];
+        }
+        let visibleSlots = Math.min(total, 5);
+        if (visibleSlots % 2 === 0 && total > visibleSlots) {
+          visibleSlots -= 1;
+        }
+        if (visibleSlots % 2 === 1) {
+          const halfWindow = Math.floor(visibleSlots / 2);
+          return Array.from({ length: visibleSlots }, (_, idx) => idx - halfWindow);
+        }
+        const start = -(visibleSlots / 2) + 1;
+        return Array.from({ length: visibleSlots }, (_, idx) => start + idx);
+      };
+      
+      const renderCarousel = () => {
+        if (!carouselTrack) {
+          return;
+        }
+        const total = property.examples.length;
+        carouselTrack.innerHTML = '';
+        if (!total) {
+          if (prevButton) prevButton.disabled = true;
+          if (nextButton) nextButton.disabled = true;
+          return;
+        }
+        const offsets = getOffsets();
+        if (prevButton) prevButton.disabled = total === 1;
+        if (nextButton) nextButton.disabled = total === 1;
+        
+        offsets.forEach(offset => {
+          const dataIndex = (currentIndex + offset + total) % total;
+          const example = property.examples[dataIndex];
+          const role = offset === 0 ? 'current' : (offset < 0 ? 'prev' : 'next');
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'thumbnail-card';
+          card.setAttribute('aria-label', `Show ${getExampleLabel(example, dataIndex)}`);
+          
+          if (role === 'current') {
+            card.classList.add('current');
+            card.disabled = true;
+            card.setAttribute('aria-current', 'true');
+          }
+          
+          const imageWrapper = document.createElement('div');
+          imageWrapper.className = 'thumbnail-image';
+          
+          let canvas = previewCache[dataIndex];
+          if (!canvas) {
+            canvas = document.createElement('canvas');
+            previewCache[dataIndex] = canvas;
+            card.classList.add('loading');
+            createThumbnailFromVideo(getPreviewVideoSrc(example), canvas, card, example.thumbnailTime);
+          }
+          imageWrapper.appendChild(canvas);
+          card.appendChild(imageWrapper);
+          
+          const labelSpan = document.createElement('span');
+          labelSpan.textContent = getExampleLabel(example, dataIndex);
+          card.appendChild(labelSpan);
+          
+          if (role !== 'current') {
+            card.addEventListener('click', () => {
+              if (isAnimating) {
+                return;
+              }
+              setActiveExample(dataIndex);
+            });
+          }
+          
+          carouselTrack.appendChild(card);
+        });
+      };
+      
+      const shiftCarousel = (delta) => {
+        const total = property.examples.length;
+        if (!total) {
+          return;
+        }
+        const targetIndex = (currentIndex + delta + total) % total;
+        if (!carouselTrack || isAnimating) {
+          if (!isAnimating) {
+            setActiveExample(targetIndex);
+          }
+          return;
+        }
+        isAnimating = true;
+        const direction = delta > 0 ? 'right' : 'left';
+        const shiftClass = direction === 'right' ? 'is-shifting-right' : 'is-shifting-left';
+        carouselTrack.classList.add('is-shifting', shiftClass);
+        const handleAnimationEnd = () => {
+          carouselTrack.classList.remove('is-shifting', shiftClass);
+          carouselTrack.removeEventListener('animationend', handleAnimationEnd);
+          isAnimating = false;
+          setActiveExample(targetIndex);
+        };
+        carouselTrack.addEventListener('animationend', handleAnimationEnd, { once: true });
+      };
+      
+      if (prevButton) {
+        prevButton.addEventListener('click', () => shiftCarousel(-1));
+      }
+      if (nextButton) {
+        nextButton.addEventListener('click', () => shiftCarousel(1));
+      }
+      
+      const updateVariantRow = (rowInfo, variantData, rowIndex) => {
+        if (!rowInfo) {
+          return;
+        }
+        if (!variantData || !variantData.video) {
+          rowInfo.container.classList.add('is-hidden');
+          return;
+        }
+        rowInfo.container.classList.remove('is-hidden');
+        const fallbackLabel = layoutMode === 'paired'
+          ? (rowIndex === 0 ? 'High value' : 'Low value')
+          : (variantData.label || property.name || 'Example');
+        const rowLabelText = (variantData.label || fallbackLabel || '').trim();
+        if (rowInfo.labelEl) {
+          rowInfo.labelEl.textContent = rowLabelText;
+        }
+        
+        if (rowInfo.badgeEl) {
+          const badgeText = (variantData.badge || rowLabelText || (rowIndex === 0 ? 'High' : 'Low'))
+            .replace(/value/i, '')
+            .trim() || (rowIndex === 0 ? 'High' : 'Low');
+          rowInfo.badgeEl.textContent = badgeText;
+        }
+        
+        if (rowInfo.metaEl) {
+          if (variantData.meta) {
+            rowInfo.metaEl.textContent = variantData.meta;
+            rowInfo.metaEl.classList.remove('is-hidden');
+          } else {
+            rowInfo.metaEl.textContent = '';
+            rowInfo.metaEl.classList.add('is-hidden');
+          }
+        }
+        
+        if (rowInfo.phycoLabelEl) {
+          rowInfo.phycoLabelEl.textContent = variantData.phycoLabel || `PhyCo · ${rowLabelText}`;
+        }
+        
+        const phycoSrc = variantData.video || '';
+        rowInfo.phycoSource.src = phycoSrc;
+        rowInfo.phycoVideo.load();
+        rowInfo.phycoVideo.playbackRate = DEFAULT_VIDEO_SPEED;
+        if (typeof rowInfo.phycoVideo.play === 'function') {
+          rowInfo.phycoVideo.play().catch(() => {});
+        }
+        
+        const filename = phycoSrc ? phycoSrc.split('/').pop() : '';
+        rowInfo.baselineRefs.forEach(({ key, element, source }) => {
+          if (!element || !source || !filename) {
+            if (source) {
+              source.removeAttribute('src');
+              element.load();
+            }
+            return;
+          }
+          const baselineSrc = `videos/${key}/${propertySlug}/${filename}`;
+          source.src = baselineSrc;
+          element.load();
+          element.playbackRate = DEFAULT_VIDEO_SPEED;
+          if (typeof element.play === 'function') {
+            element.play().catch(() => {});
+          }
+        });
+        
+        if (rowInfo.extraBox) {
+          if (variantData.extraImage) {
+            rowInfo.extraImage.src = variantData.extraImage;
+            rowInfo.extraImage.alt = variantData.extraImageLabel || property.extraImageLabel || `${rowLabelText} reference`;
+            rowInfo.extraLabel.textContent = variantData.extraImageLabel || property.extraImageLabel || 'Reference image';
+            rowInfo.extraBox.classList.remove('is-hidden');
+          } else {
+            rowInfo.extraImage.removeAttribute('src');
+            rowInfo.extraBox.classList.add('is-hidden');
+          }
+        }
+      };
+      
+      const setActiveExample = (idx) => {
+        if (!property.examples.length) {
+          return;
+        }
+        const total = property.examples.length;
+        currentIndex = ((idx % total) + total) % total;
+        const example = property.examples[currentIndex];
+        if (!example) {
+          return;
+        }
+        
+        const variantEntries = getVariantEntries(example);
+        variantRows.forEach((rowInfo, rowIndex) => {
+          const variantData = variantEntries[rowIndex];
+          if (!variantData) {
+            rowInfo.container.classList.add('is-hidden');
+            return;
+          }
+          updateVariantRow(rowInfo, variantData, rowIndex);
+        });
+        
+        const labelText = getExampleLabel(example, currentIndex);
+        if (sharedLabel) {
+          sharedLabel.textContent = labelText;
+        }
+        if (sharedMeta) {
+          const metaText = typeof example.meta === 'string' ? example.meta : '';
+          if (metaText) {
+            sharedMeta.textContent = metaText;
+            sharedMeta.classList.remove('is-hidden');
+          } else {
+            sharedMeta.textContent = '';
+            sharedMeta.classList.add('is-hidden');
+          }
+        }
+        
+        renderCarousel();
+      };
+      
+      setActiveExample(0);
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    buildPropertyGallery();
+    
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+      video.playbackRate = DEFAULT_VIDEO_SPEED;
+    });
+    
+    const examples = document.querySelectorAll('.example-container');
+    let sliderCount = 0;
+    examples.forEach(example => {
+      const speedSlider = example.querySelector('.speed-slider');
+      if (!speedSlider) {
+        return;
+      }
+      
+      sliderCount += 1;
+      const exampleId = `example-${sliderCount}`;
+      example.id = exampleId;
+      
+      const videos = example.querySelectorAll('video');
+      const speedValue = example.querySelector('.speed-value');
+      
+      speedSlider.addEventListener('input', function() {
+        const speed = parseFloat(this.value);
+        if (speedValue) {
+          speedValue.textContent = speed.toFixed(1) + 'x';
+        }
+        videos.forEach(video => {
+          video.playbackRate = speed;
+        });
+      });
+    });
+  });
+</script>
+
+<footer class="footer">
+  <div class="container is-fluid has-text-centered">
+    <p>
+      Anonymous Supplementary Material - Submission ID: 9093
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
