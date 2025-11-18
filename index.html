@@ -119,6 +119,157 @@
       border-radius: 4px;
     }
     
+    .fine-control-section {
+      text-align: center;
+    }
+    
+    .section-heading-panel {
+      background: linear-gradient(135deg, #e8f0ff, #f8fbff);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(50, 115, 220, 0.15);
+      border: 1px solid rgba(50, 115, 220, 0.2);
+    }
+    
+    .section-heading-panel .title {
+      color: #1d4f91;
+      letter-spacing: 0.04em;
+      /* text-transform: uppercase; */
+    }
+    
+    .fine-control-carousel {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .fine-control-nav {
+      border: none;
+      background-color: #3273dc;
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    
+    .fine-control-nav:hover {
+      background-color: #2754a0;
+    }
+    
+    .fine-control-content {
+      flex: 1;
+    }
+    
+    .fine-control-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .fine-control-card {
+      flex: 1 1 220px;
+      max-width: 320px;
+    }
+    
+    .fine-control-video {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #000;
+    }
+    
+    .fine-control-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .fine-control-level {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.15rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .fine-control-level.low {
+      background-color: #48c78e;
+    }
+    
+    .fine-control-level.medium {
+      background-color: #ffdd57;
+      color: #222;
+    }
+    
+    .fine-control-level.high {
+      background-color: #f14668;
+    }
+    
+    .fine-control-attribute {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+    }
+    
+    .fine-control-example-title {
+      text-align: center;
+    }
+    
+    .fine-control-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .fine-control-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #3273dc;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    
+    .fine-control-dot.is-active {
+      background: #3273dc;
+    }
+    
+    @media (max-width: 768px) {
+      .fine-control-carousel {
+        flex-direction: column;
+      }
+      
+      .fine-control-nav {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .fine-control-card {
+        max-width: 100%;
+      }
+    }
+    
     .title.is-3 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
@@ -630,8 +781,52 @@
       </p>
     </div> -->
     
+    <div class="example-container">
+      <div class="example-header section-heading-panel">
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Generalization to Different Styles</h2>
+      </div>
+      <div class="columns is-desktop is-variable is-1">
+        <div class="column is-3">
+          <div class="video-title">Part 1</div>
+          <div class="video-wrapper">
+            <video src="videos/hillclimb/hill_climb_part1.mp4" autoplay loop muted controls playsinline></video>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-title">Part 2</div>
+          <div class="video-wrapper">
+            <video src="videos/hillclimb/hill_climb_part2.mp4" autoplay loop muted controls playsinline></video>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-title">Part 3</div>
+          <div class="video-wrapper">
+            <video src="videos/hillclimb/hill_climb_part3.mp4" autoplay loop muted controls playsinline></video>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-title">Part 4</div>
+          <div class="video-wrapper">
+            <video src="videos/hillclimb/hill_climb_part4.mp4" autoplay loop muted controls playsinline></video>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="example-container fine-control-section">
+      <div class="example-header section-heading-panel">
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Fine-Grained Control of Physical Attributes</h2>
+      </div>
+      <div class="fine-control-carousel">
+        <button class="fine-control-nav" id="fine-control-prev" aria-label="Previous example">&lsaquo;</button>
+        <div class="fine-control-content" id="fine-control-content"></div>
+        <button class="fine-control-nav" id="fine-control-next" aria-label="Next example">&rsaquo;</button>
+      </div>
+      <div class="fine-control-dots" id="fine-control-dots"></div>
+    </div>
+    
     <div class="example-container property-gallery">
-      <div class="example-header" >
+      <div class="example-header section-heading-panel">
         <h2 class="title is-3" style="text-align:center; width: 100%;">Generated Outputs with Controllable Physical Properties</h2>
       </div>
       <!-- <div class="explanation-text">
@@ -644,6 +839,189 @@
 </section>
 
 <script>
+  const fineControlExamples = [
+    {
+      title: 'Rubber duck deformation',
+      attribute: 'Material deformation',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/deformation/rubber_duck1_v2w_high_deformable.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/deformation/rubber_duck1_v2w_medium_deformable.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/deformation/rubber_duck1_v2w_low_deformable.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Tennis ball deformation',
+      attribute: 'Material deformation',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_high_deformable.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_medium_deformable.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_low_deformable.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Laundry basket slide',
+      attribute: 'Surface friction',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/friction/laundrybasket1_v2w_high_friction.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/friction/laundrybasket1_v2w_medium_friction.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/friction/laundrybasket1_v2w_low_friction.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Potted plant slide',
+      attribute: 'Surface friction',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/friction/plant_slide-v2_v2w_high_friction.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/friction/plant_slide-v2_v2w_medium_friction.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/friction/plant_slide-v2_v2w_low_friction.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Rubber duck bounce',
+      attribute: 'Restitution control',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/restitution/rubber_duck1_v2w_high_bounce.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/restitution/rubber_duck1_v2w_medium_bounce.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/restitution/rubber_duck1_v2w_low_bounce.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Tennis ball bounce',
+      attribute: 'Restitution control',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_high_bounce.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_medium_bounce.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_low_bounce.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Trampoline bounce',
+      attribute: 'Restitution control',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/restitution/trampoline_v1_high_bounce.mp4',
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/restitution/trampoline_v1_medium_bounce.mp4',
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/restitution/trampoline_v1_low_bounce.mp4',
+        }
+      ]
+    }
+  ];
+  
+  const fineControlContent = document.getElementById('fine-control-content');
+  const fineControlDotsContainer = document.getElementById('fine-control-dots');
+  const fineControlPrevBtn = document.getElementById('fine-control-prev');
+  const fineControlNextBtn = document.getElementById('fine-control-next');
+  let fineControlIndex = 0;
+  
+  function renderFineControlExample() {
+    const example = fineControlExamples[fineControlIndex];
+    const cards = example.variants.map(variant => `
+      <div class="fine-control-card">
+        <div class="fine-control-video">
+          <span class="fine-control-level ${variant.level.toLowerCase()}">${variant.level}</span>
+          <video src="${variant.video}" autoplay loop muted controls playsinline></video>
+        </div>
+        <div class="fine-control-attribute">${example.attribute}</div>
+      </div>
+    `).join('');
+    
+    fineControlContent.innerHTML = `
+      <div class="fine-control-example-title">
+        <h3 class="title is-4" style="margin-bottom: 0.5rem;">${example.title}</h3>
+      </div>
+      <div class="fine-control-grid">
+        ${cards}
+      </div>
+    `;
+  }
+  
+  function renderFineControlDots() {
+    fineControlDotsContainer.innerHTML = '';
+    fineControlExamples.forEach((example, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'fine-control-dot' + (index === fineControlIndex ? ' is-active' : '');
+      dot.setAttribute('aria-label', `Go to ${example.title}`);
+      dot.addEventListener('click', () => {
+        fineControlIndex = index;
+        renderFineControlExample();
+        renderFineControlDots();
+      });
+      fineControlDotsContainer.appendChild(dot);
+    });
+  }
+  
+  function cycleFineControl(step) {
+    fineControlIndex = (fineControlIndex + step + fineControlExamples.length) % fineControlExamples.length;
+    renderFineControlExample();
+    renderFineControlDots();
+  }
+  
+  fineControlPrevBtn.addEventListener('click', () => cycleFineControl(-1));
+  fineControlNextBtn.addEventListener('click', () => cycleFineControl(1));
+  renderFineControlExample();
+  renderFineControlDots();
+  
   const DEFAULT_VIDEO_SPEED = 0.9;
   const BASELINE_MODELS = [
     { key: 'cogvideox5B', label: 'CogVideoX-5B' },
@@ -966,34 +1344,158 @@
       layout: 'paired',
       examples: [
         {
-          label: 'Ping pong roll · bounce sweep',
-          meta: 'Higher restitution preserves energy across impacts, lower values damp quickly.',
+          label: 'Ball bounce 2',
           variants: [
             {
               label: 'Low bounce',
-              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_low_bounce.mp4',
-              meta: 'Energy dissipates in a couple of contacts.'
+              video: 'videos/physpropprior/restitution/ball_bounce_2_v2w_low_bounce_p2.mp4',
             },
             {
               label: 'High bounce',
-              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_high_bounce.mp4',
-              meta: 'Ball keeps rebounding down the lane.'
+              video: 'videos/physpropprior/restitution/ball_bounce_2_v2w_high_bounce_p2.mp4',
             }
           ]
         },
         {
-          label: 'Rubber duck drop · bounce sweep',
-          meta: 'Changing restitution alone makes the duck either thud or spring back.',
+          label: 'Ball roll v1',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v1_v2w_low_bounce.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v1_v2w_high_bounce.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Ball roll v2',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v2_v2w_low_bounce.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v2_v2w_high_bounce.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Ball roll v3',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v3_v2w_low_bounce.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/ball_roll-v3_v2w_high_bounce.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Basketball bounce v1',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/basketball_bounce_v1_low_bounce_p1.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/basketball_bounce_v1_high_bounce_p1.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Football juggle v1',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/football_juggle_v1_v2w_low_bounce_p1.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/football_juggle_v1_v2w_high_bounce_p1.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Ping pong roll',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_low_bounce.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/pingpong_roll-v1_v2w_high_bounce.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Rubber duck drop',
           variants: [
             {
               label: 'Low bounce',
               video: 'videos/physpropprior/restitution/rubber_duck1_v2w_low_bounce_p2.mp4',
-              meta: 'Inelastic contact sticks to the surface.'
             },
             {
               label: 'High bounce',
               video: 'videos/physpropprior/restitution/rubber_duck1_v2w_high_bounce_p2.mp4',
-              meta: 'Elastic contact snaps the duck upward.'
+            }
+          ]
+        },
+        {
+          label: 'Tennis ball bounce 2',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/tennis_ball_bounce_2_v2w_low_bounce_p2.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/tennis_ball_bounce_2_v2w_high_bounce_p2.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Tennis ball bounce 3',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/tennis_ball_bounce_3_v2w_low_bounce_p2.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/tennis_ball_bounce_3_v2w_high_bounce_p2.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Trampoline v1',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/trampoline_v1_low_bounce_p2.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/trampoline_v1_high_bounce_p2.mp4',
+            }
+          ]
+        },
+        {
+          label: 'Trampoline v2',
+          variants: [
+            {
+              label: 'Low bounce',
+              video: 'videos/physpropprior/restitution/trampoline_v2_low_bounce_p2.mp4',
+            },
+            {
+              label: 'High bounce',
+              video: 'videos/physpropprior/restitution/trampoline_v2_high_bounce_p2.mp4',
             }
           ]
         }
