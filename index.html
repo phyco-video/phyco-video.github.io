@@ -255,6 +255,41 @@
       background: #3273dc;
     }
     
+    .composition-section {
+      text-align: center;
+    }
+    
+    .composition-description {
+      font-size: 0.95rem;
+      color: #4a4a4a;
+      margin-bottom: 0.75rem;
+    }
+    
+    .composition-label {
+      margin-top: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1e3e6b;
+    }
+    
+    .attribute-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+    
+    .attribute-tag {
+      background-color: rgba(50, 115, 220, 0.1);
+      color: #1d4f91;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
     @media (max-width: 768px) {
       .fine-control-carousel {
         flex-direction: column;
@@ -825,9 +860,21 @@
       <div class="fine-control-dots" id="fine-control-dots"></div>
     </div>
     
+    <div class="example-container composition-section">
+      <div class="example-header section-heading-panel">
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Compositionality of Physical Attributes</h2>
+      </div>
+      <div class="fine-control-carousel">
+        <button class="fine-control-nav" id="composition-prev" aria-label="Previous example">&lsaquo;</button>
+        <div class="fine-control-content" id="composition-content"></div>
+        <button class="fine-control-nav" id="composition-next" aria-label="Next example">&rsaquo;</button>
+      </div>
+      <div class="fine-control-dots" id="composition-dots"></div>
+    </div>
+    
     <div class="example-container property-gallery">
       <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">Generated Outputs with Controllable Physical Properties</h2>
+        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparisons </h2>
       </div>
       <!-- <div class="explanation-text">
         <p>
@@ -1021,6 +1068,130 @@
   fineControlNextBtn.addEventListener('click', () => cycleFineControl(1));
   renderFineControlExample();
   renderFineControlDots();
+  
+  const compositionExamples = [
+    {
+      title: 'Layered bounciness and deformation',
+      // description: 'Start from pure bounce behavior and progressively add soft, deformable cues.',
+      variants: [
+        {
+          // label: 'Pure Bouncing',
+          attributes: ['Bounciness'],
+          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce.mp4',
+        },
+        {
+          // label: 'Bouncing + Deforming',
+          attributes: ['Bounciness', 'Deformation'],
+          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce_deform.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Layered bounciness, deformation, and force',
+      // description: 'Start from pure bounce behavior and progressively add soft, deformable cues.',
+      variants: [
+        {
+          // label: 'Bouncing + Deforming',
+          attributes: ['Bounciness', 'Deformation'],
+          video: 'videos/composition/greenball_v1_v2w_bounce_deform.mp4',
+        },
+        {
+          // label: 'Force + bounce + deformation',
+          attributes: ['Bounciness', 'Deformation', 'Force'],
+          video: 'videos/composition/greenball_v1_v2w_bounce_deform_force.mp4',
+        },
+      ]
+    },
+    {
+      title: 'Layered force and bounce',
+      // description: 'Force inputs re-route motion when layered on top of bounce and deformation.',
+      variants: [
+        {
+          // label: 'Force-only roll',
+          attributes: ['Force'],
+          video: 'videos/composition/pingpong_roll-v1_v2w_force.mp4',
+        },
+        {
+          // label: 'Bounciness + force',
+          attributes: ['Bounciness', 'Force'],
+          video: 'videos/composition/pingpong_roll-v1_v2w_bounce_force.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Layered force and friction',
+      // description: 'Add surface friction to a guided push to precisely control glide distance.',
+      variants: [
+        {
+          // label: 'Guided push',
+          attributes: ['Force'],
+          video: 'videos/composition/plant_slide-v3_v2w_force.mp4',
+        },
+        {
+          // label: 'Force + friction',
+          attributes: ['Force', 'Friction'],
+          video: 'videos/composition/plant_slide-v3_v2w_friction_force.mp4',
+        }
+      ]
+    }
+  ];
+  
+  const compositionContent = document.getElementById('composition-content');
+  const compositionDotsContainer = document.getElementById('composition-dots');
+  const compositionPrevBtn = document.getElementById('composition-prev');
+  const compositionNextBtn = document.getElementById('composition-next');
+  let compositionIndex = 0;
+  
+  function renderCompositionExample() {
+    const example = compositionExamples[compositionIndex];
+    const cards = example.variants.map(variant => `
+      <div class="fine-control-card">
+        <div class="fine-control-video">
+          <video src="${variant.video}" autoplay loop muted controls playsinline></video>
+        </div>
+        <!-- <div class="composition-label">${variant.label}</div> -->
+        <div class="attribute-tag-list">
+          ${variant.attributes.map(attr => `<span class="attribute-tag">${attr}</span>`).join('')}
+        </div>
+      </div>
+    `).join('');
+    
+    compositionContent.innerHTML = `
+      <div class="fine-control-example-title">
+        <h3 class="title is-4" style="margin-bottom: 0.25rem;">${example.title}</h3>
+        ${example.description ? `<p class="composition-description">${example.description}</p>` : ''}
+      </div>
+      <div class="fine-control-grid">
+        ${cards}
+      </div>
+    `;
+  }
+  
+  function renderCompositionDots() {
+    compositionDotsContainer.innerHTML = '';
+    compositionExamples.forEach((example, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'fine-control-dot' + (index === compositionIndex ? ' is-active' : '');
+      dot.setAttribute('aria-label', `Go to ${example.title}`);
+      dot.addEventListener('click', () => {
+        compositionIndex = index;
+        renderCompositionExample();
+        renderCompositionDots();
+      });
+      compositionDotsContainer.appendChild(dot);
+    });
+  }
+  
+  function cycleComposition(step) {
+    compositionIndex = (compositionIndex + step + compositionExamples.length) % compositionExamples.length;
+    renderCompositionExample();
+    renderCompositionDots();
+  }
+  
+  compositionPrevBtn.addEventListener('click', () => cycleComposition(-1));
+  compositionNextBtn.addEventListener('click', () => cycleComposition(1));
+  renderCompositionExample();
+  renderCompositionDots();
   
   const DEFAULT_VIDEO_SPEED = 0.9;
   const BASELINE_MODELS = [
