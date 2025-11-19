@@ -739,6 +739,82 @@
       text-align: center;
       font-size: 0.95rem;
     }
+
+    .prompt-button {
+      background-color: #f6f8fb;
+      color: #ec0606;
+      border: 1px solid #d0d7e0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.4rem;
+      width: auto;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+
+    .prompt-button:hover {
+      background-color: #f0f3f7;
+      color: #3273dc;
+      border-color: #3273dc;
+    }
+
+    .prompt-button:active {
+      background-color: #6f9fdb;
+    }
+
+    .prompt-display {
+      background-color: #f8f9fa;
+      border-left: 4px solid #3273dc;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #333;
+      display: none;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .prompt-display.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prompt-label {
+      font-weight: 700;
+      color: #1d4f91;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .prompt-text {
+      font-style: italic;
+      color: #555;
+    }
+
+    .video-with-prompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     
     .property-shared-info {
       text-align: center;
@@ -863,29 +939,45 @@
       </div>
       <div class="columns is-desktop is-variable is-1">
         <div class="column is-3">
-          <div class="video-title">Part 1</div>
-          <div class="video-wrapper">
-            <video src="videos/hillclimb/hill_climb_part1.mp4" autoplay loop muted controls playsinline></video>
+          <div class="video-with-prompt">
+            <div class="video-title">Part 1</div>
+            <div class="video-wrapper">
+              <video src="videos/hillclimb/hill_climb_part1.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="styles-part1" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
-          <div class="video-title">Part 2</div>
-          <div class="video-wrapper">
-            <video src="videos/hillclimb/hill_climb_part2.mp4" autoplay loop muted controls playsinline></video>
+          <div class="video-with-prompt">
+            <div class="video-title">Part 2</div>
+            <div class="video-wrapper">
+              <video src="videos/hillclimb/hill_climb_part2.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="styles-part2" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
-          <div class="video-title">Part 3</div>
-          <div class="video-wrapper">
-            <video src="videos/hillclimb/hill_climb_part3.mp4" autoplay loop muted controls playsinline></video>
+          <div class="video-with-prompt">
+            <div class="video-title">Part 3</div>
+            <div class="video-wrapper">
+              <video src="videos/hillclimb/hill_climb_part3.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="styles-part3" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
-          <div class="video-title">Part 4</div>
-          <div class="video-wrapper">
-            <video src="videos/hillclimb/hill_climb_part4.mp4" autoplay loop muted controls playsinline></video>
+          <div class="video-with-prompt">
+            <div class="video-title">Part 4</div>
+            <div class="video-wrapper">
+              <video src="videos/hillclimb/hill_climb_part4.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="styles-part4" data-section="styles">Click for Prompt</button>
           </div>
         </div>
+      </div>
+      <div id="styles-prompt-display" class="prompt-display">
+        <div class="prompt-label">Prompt:</div>
+        <div class="prompt-text" id="styles-prompt-text"></div>
       </div>
     </div>
     
@@ -893,12 +985,17 @@
       <div class="example-header section-heading-panel">
         <h2 class="title is-3" style="text-align:center; width: 100%;">Fine-Grained Control of Physical Attributes</h2>
       </div>
-      <div class="fine-control-carousel">
-        <button class="fine-control-nav" id="fine-control-prev" aria-label="Previous example">&lsaquo;</button>
-        <div class="fine-control-content" id="fine-control-content"></div>
-        <button class="fine-control-nav" id="fine-control-next" aria-label="Next example">&rsaquo;</button>
+      <div class="fine-control-content" id="fine-control-content"></div>
+      <div class="property-carousel-wrapper">
+        <div class="property-carousel-nav">
+          <button class="fine-control-nav" id="fine-control-prev" aria-label="Previous example">&lsaquo;</button>
+          <div class="property-nav-track">
+            <div class="thumbnail-track" id="fine-control-thumbnails"></div>
+          </div>
+          <button class="fine-control-nav" id="fine-control-next" aria-label="Next example">&rsaquo;</button>
+        </div>
+        <div class="fine-control-dots" id="fine-control-dots"></div>
       </div>
-      <div class="fine-control-dots" id="fine-control-dots"></div>
     </div>
     
     <div class="example-container composition-section">
@@ -915,7 +1012,7 @@
     
     <div class="example-container property-gallery">
       <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparison</h2>
+        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparisons</h2>
       </div>
       <!-- <div class="explanation-text">
         <p>
@@ -935,14 +1032,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/deformation/rubber_duck1_v2w_high_deformable.mp4',
+          prompt: 'A very soft and deformable rubber duck falls onto a wooden surface naturally due to gravity.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/deformation/rubber_duck1_v2w_medium_deformable.mp4',
+          prompt: 'A deformable elastic rubber duck falls onto a wooden surface naturally due to gravity.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/deformation/rubber_duck1_v2w_low_deformable.mp4',
+          prompt: 'A deformable elastic rubber duck falls onto a wooden surface naturally due to gravity.'
         }
       ]
     },
@@ -953,14 +1053,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_high_deformable.mp4',
+          prompt: 'A deformable elastic tennis ball falls down naturally due to gravity.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_medium_deformable.mp4',
+          prompt: 'A deformable elastic tennis ball falls down naturally due to gravity.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/deformation/tennis_ball_bounce_2_v2w_low_deformable.mp4',
+          prompt: 'A deformable elastic tennis ball falls down naturally due to gravity.'
         }
       ]
     },
@@ -971,14 +1074,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/friction/laundrybasket1_v2w_high_friction.mp4',
+          prompt: 'A white plastic laundry basket filled with colorful clothes is placed on a smooth wooden floor in a cozy living room and given an initial velocity of 2m/s in the left direction. This initial velocity makes it move along the floor surface in a straight and elegant fashion. The only thing that is moving in the video is the laundry basket. All other objects are stationary. The video accurately captures the physics of a laundry basket sliding across a floor from a camera that is stationary.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/friction/laundrybasket1_v2w_medium_friction.mp4',
+          prompt: 'A white plastic laundry basket filled with colorful clothes is placed on a smooth wooden floor in a cozy living room and given an initial velocity of 2m/s in the left direction. This initial velocity makes it move along the floor surface in a straight and elegant fashion. The only thing that is moving in the video is the laundry basket. All other objects are stationary. The video accurately captures the physics of a laundry basket sliding across a floor from a camera that is stationary.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/friction/laundrybasket1_v2w_low_friction.mp4',
+          prompt: 'A white plastic laundry basket filled with colorful clothes is placed on a smooth wooden floor in a cozy living room and given an initial velocity of 2m/s in the left direction. This initial velocity makes it move along the floor surface in a straight and elegant fashion. The only thing that is moving in the video is the laundry basket. All other objects are stationary. The video accurately captures the physics of a laundry basket sliding across a floor from a camera that is stationary.'
         }
       ]
     },
@@ -989,14 +1095,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/friction/plant_slide-v2_v2w_high_friction.mp4',
+          prompt: 'A potted plant with large green leaves in a white ceramic pot of mass 1kg is placed on a smooth white round table surface and given an initial velocity of 2m/s in the right direction. This initial velocity makes it slide along the table surface in a straight and elegant fashion. The only thing that is moving in the video is the potted plant with green foliage. All other objects are stationary. The video accurately captures the physics of a potted plant sliding across a table from a camera that is stationary.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/friction/plant_slide-v2_v2w_medium_friction.mp4',
+          prompt: 'A potted plant with large green leaves in a white ceramic pot of mass 1kg is placed on a smooth white round table surface and given an initial velocity of 2m/s in the right direction. This initial velocity makes it slide along the table surface in a straight and elegant fashion. The only thing that is moving in the video is the potted plant with green foliage. All other objects are stationary. The video accurately captures the physics of a potted plant sliding across a table from a camera that is stationary.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/friction/plant_slide-v2_v2w_low_friction.mp4',
+          prompt: 'A potted plant with large green leaves in a white ceramic pot of mass 1kg is placed on a smooth white round table surface and given an initial velocity of 2m/s in the right direction. This initial velocity makes it slide along the table surface in a straight and elegant fashion. The only thing that is moving in the video is the potted plant with green foliage. All other objects are stationary. The video accurately captures the physics of a potted plant sliding across a table from a camera that is stationary.'
         }
       ]
     },
@@ -1007,14 +1116,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/restitution/rubber_duck1_v2w_high_bounce.mp4',
+          prompt: 'A rubber duck falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the rubber duck. All other objects are stationary. The video accurately captures the physics of rubber duck falling and bouncing off a surface.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/restitution/rubber_duck1_v2w_medium_bounce.mp4',
+          prompt: 'A rubber duck falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the rubber duck. All other objects are stationary. The video accurately captures the physics of rubber duck falling and bouncing off a surface.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/restitution/rubber_duck1_v2w_low_bounce.mp4',
+          prompt: 'A rubber duck falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the rubber duck. All other objects are stationary. The video accurately captures the physics of rubber duck falling and bouncing off a surface.'
         }
       ]
     },
@@ -1025,14 +1137,17 @@
         {
           level: 'High',
           video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_high_bounce.mp4',
+          prompt: 'A tennis ball falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the tennis ball. All other objects are stationary. The video accurately captures the physics of tennis ball falling and bouncing off a surface.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_medium_bounce.mp4',
+          prompt: 'A tennis ball falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the tennis ball. All other objects are stationary. The video accurately captures the physics of tennis ball falling and bouncing off a surface.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/restitution/tennis_ball_bounce_2_v2w_low_bounce.mp4',
+          prompt: 'A tennis ball falls onto the ground naturally due to gravity and bounces up after impact. The only thing that is moving in the video is the tennis ball. All other objects are stationary. The video accurately captures the physics of tennis ball falling and bouncing off a surface.'
         }
       ]
     },
@@ -1043,37 +1158,86 @@
         {
           level: 'High',
           video: 'videos/fine_control/restitution/trampoline_v1_high_bounce.mp4',
+          prompt: 'A person bounces up and down on a trampoline due to gravity and the elastic rebound of the trampoline surface. The only thing that is moving in the video is the person. All other objects, including the trampoline frame and background, are stationary. The video accurately captures the physics of a person bouncing vertically on a trampoline.'
         },
         {
           level: 'Medium',
           video: 'videos/fine_control/restitution/trampoline_v1_medium_bounce.mp4',
+          prompt: 'A person bounces up and down on a trampoline due to gravity and the elastic rebound of the trampoline surface. The only thing that is moving in the video is the person. All other objects, including the trampoline frame and background, are stationary. The video accurately captures the physics of a person bouncing vertically on a trampoline.'
         },
         {
           level: 'Low',
           video: 'videos/fine_control/restitution/trampoline_v1_low_bounce.mp4',
+          prompt: 'A person bounces up and down on a trampoline due to gravity and the elastic rebound of the trampoline surface. The only thing that is moving in the video is the person. All other objects, including the trampoline frame and background, are stationary. The video accurately captures the physics of a person bouncing vertically on a trampoline.'
+        }
+      ]
+    },
+    {
+      title: 'Cart force push',
+      attribute: 'Force control',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/force/cart_roll_v1_v2w_force_090_angle_1.mp4',
+          prompt: 'A small wooden toy cart with a blue VEPROJECT 1 sign is pushed by a strong force in the right direction, causing it to roll smoothly and eventually drive out of the frame on the right side. The toy cart is the only thing that is in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy cart rolling under a strong applied, as observed from a fixed camera viewpoint.'
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/force/cart_roll_v1_v2w_force_050_angle_1.mp4',
+          prompt: 'A small wooden toy cart with a blue VEPROJECT 1 sign is pushed by a moderate force in the right direction, causing it to roll towards the right on a flat tabletop surface. The toy cart is the only thing that is in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy cart rolling under a moderate applied force, as observed from a fixed camera viewpoint.'
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/force/cart_roll_v1_v2w_force_001_angle_1.mp4',
+          prompt: 'A small wooden toy cart with a blue VEPROJECT 1 sign is pushed by a gentle force in the right direction, causing it to roll slightly towards the right on a flat tabletop surface. The toy cart is the only thing that is in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy cart rolling under a small applied force, as observed from a fixed camera viewpoint.'
+        }
+      ]
+    },
+    {
+      title: 'Toy van force push',
+      attribute: 'Force control',
+      variants: [
+        {
+          level: 'High',
+          video: 'videos/fine_control/force/toycar4_v2w_force_090_angle_1.mp4',
+          prompt: 'A small yellow toy van is pushed by a strong force in the left direction, causing it to roll smoothly and eventually drive out of the frame on the left side. The toy van is the only object in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy van rolling under the applied force, as observed from a fixed camera viewpoint.'
+        },
+        {
+          level: 'Medium',
+          video: 'videos/fine_control/force/toycar4_v2w_force_050_angle_1.mp4',
+          prompt: 'A small yellow toy van is pushed by a moderate force in the left direction, causing it to roll towards the left side of the frame in a straight and elegant fashion. The toy van is the only object in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy van rolling under the applied force, as observed from a fixed camera viewpoint.'
+        },
+        {
+          level: 'Low',
+          video: 'videos/fine_control/force/toycar4_v2w_force_020_angle_1.mp4',
+          prompt: 'A small yellow toy van is pushed by a gentle force in the left direction, causing it to roll slightly towards the left side of the frame in a straight and elegant fashion. The toy van is the only object in motion, while everything else remains stationary. The video clearly demonstrates the physics of the toy van rolling under the applied force, as observed from a fixed camera viewpoint.'
         }
       ]
     }
+
   ];
   
   const fineControlContent = document.getElementById('fine-control-content');
   const fineControlDotsContainer = document.getElementById('fine-control-dots');
+  const fineControlThumbnailsContainer = document.getElementById('fine-control-thumbnails');
   const fineControlPrevBtn = document.getElementById('fine-control-prev');
   const fineControlNextBtn = document.getElementById('fine-control-next');
   let fineControlIndex = 0;
-  
+  const fineControlPreviewCache = fineControlExamples.map(() => null);
+
   function renderFineControlExample() {
     const example = fineControlExamples[fineControlIndex];
-    const cards = example.variants.map(variant => `
+    const cards = example.variants.map((variant, idx) => `
       <div class="fine-control-card">
         <div class="fine-control-video">
           <span class="fine-control-level ${variant.level.toLowerCase()}">${variant.level}</span>
           <video src="${variant.video}" autoplay loop muted controls playsinline></video>
         </div>
         <div class="fine-control-attribute">${example.attribute}</div>
+        <button class="prompt-button" data-prompt-id="finecontrol-${fineControlIndex}-${idx}" data-section="finecontrol">Click for Prompt</button>
       </div>
     `).join('');
-    
+
     fineControlContent.innerHTML = `
       <div class="fine-control-example-title">
         <h3 class="title is-4" style="margin-bottom: 0.5rem;">${example.title}</h3>
@@ -1081,9 +1245,65 @@
       <div class="fine-control-grid">
         ${cards}
       </div>
+      <div id="finecontrol-prompt-display" class="prompt-display">
+        <div class="prompt-label">Prompt:</div>
+        <div class="prompt-text" id="finecontrol-prompt-text"></div>
+      </div>
     `;
+
+    // Re-attach event listeners to the new prompt buttons
+    attachPromptButtonListeners('finecontrol');
   }
-  
+
+  function renderFineControlThumbnails() {
+    if (!fineControlThumbnailsContainer) {
+      return;
+    }
+    fineControlThumbnailsContainer.innerHTML = '';
+
+    fineControlExamples.forEach((example, index) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'thumbnail-card';
+      card.setAttribute('aria-label', `Show ${example.title}`);
+
+      if (index === fineControlIndex) {
+        card.classList.add('current');
+        card.disabled = true;
+        card.setAttribute('aria-current', 'true');
+      }
+
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'thumbnail-image';
+
+      let canvas = fineControlPreviewCache[index];
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        fineControlPreviewCache[index] = canvas;
+        card.classList.add('loading');
+        const previewVideoSrc = example.variants[0]?.video || '';
+        createThumbnailFromVideo(previewVideoSrc, canvas, card, 0.15);
+      }
+      imageWrapper.appendChild(canvas);
+      card.appendChild(imageWrapper);
+
+      const labelSpan = document.createElement('span');
+      labelSpan.textContent = example.title;
+      card.appendChild(labelSpan);
+
+      if (index !== fineControlIndex) {
+        card.addEventListener('click', () => {
+          fineControlIndex = index;
+          renderFineControlExample();
+          renderFineControlThumbnails();
+          renderFineControlDots();
+        });
+      }
+
+      fineControlThumbnailsContainer.appendChild(card);
+    });
+  }
+
   function renderFineControlDots() {
     fineControlDotsContainer.innerHTML = '';
     fineControlExamples.forEach((example, index) => {
@@ -1093,22 +1313,83 @@
       dot.addEventListener('click', () => {
         fineControlIndex = index;
         renderFineControlExample();
+        renderFineControlThumbnails();
         renderFineControlDots();
       });
       fineControlDotsContainer.appendChild(dot);
     });
   }
-  
+
   function cycleFineControl(step) {
     fineControlIndex = (fineControlIndex + step + fineControlExamples.length) % fineControlExamples.length;
     renderFineControlExample();
+    renderFineControlThumbnails();
     renderFineControlDots();
   }
-  
+
   fineControlPrevBtn.addEventListener('click', () => cycleFineControl(-1));
   fineControlNextBtn.addEventListener('click', () => cycleFineControl(1));
   renderFineControlExample();
+  renderFineControlThumbnails();
   renderFineControlDots();
+
+  // Prompt data for the styles section
+  const stylesPrompts = {
+    'styles-part1': 'The cartoon car is pushed by a gentle force from the engine towards the right side of the frame which makes it descend the hill in a smooth and elegant fashion due to a very low friction coefficient. The car is the only thing that is moving in the video and it utlimately moves out of the frame as it drives by. All other objects are stationary. The video accurately captures the physics of a car going downhill from a stationary camera viewpoint.',
+    'styles-part2': 'The cartoon car is pushed by a strong force from the engine towards the right side of the frame which makes it ascent the hill in a smooth and elegant fashion. The car is the only thing that is moving in the video. All other objects are stationary. The video accurately captures the physics of a car racing on a hill climb track from a stationary camera viewpoint.',
+    'styles-part3': 'The person and the cartoon car drops onto a inflatable bed that is soft and deformable, causing the bed to stretch and deform under the force from the toy cartoon car. The cartoon car then bounces back and uses this force energy to move to the right end of the frame.',
+    'styles-part4': 'The cartoon car is pushed by a moderate force from the engine towards the right side of the frame which makes it move closer to the home on the right while having a bumpy ride due to the stones on the floor. The car is the only thing that is moving in the video and it stops close to the house on the right. All other objects are stationary. The video accurately captures the physics of a cartoon car driving from a stationary camera viewpoint.'
+  };
+
+  // Function to show prompts
+  function showPrompt(promptId, section) {
+    let promptText = '';
+    let displayElement = null;
+    let textElement = null;
+
+    if (section === 'styles') {
+      promptText = stylesPrompts[promptId] || 'Prompt text to be filled in.';
+      displayElement = document.getElementById('styles-prompt-display');
+      textElement = document.getElementById('styles-prompt-text');
+    } else if (section === 'finecontrol') {
+      // Parse the promptId to get example index and variant index
+      const parts = promptId.split('-');
+      const exampleIdx = parseInt(parts[1]);
+      const variantIdx = parseInt(parts[2]);
+      const example = fineControlExamples[exampleIdx];
+      promptText = example?.variants[variantIdx]?.prompt || 'Prompt text to be filled in.';
+      displayElement = document.getElementById('finecontrol-prompt-display');
+      textElement = document.getElementById('finecontrol-prompt-text');
+    }
+
+    if (displayElement && textElement) {
+      const isCurrentlyShown = displayElement.classList.contains('active') && textElement.textContent === promptText;
+
+      // Hide all prompt displays
+      document.querySelectorAll('.prompt-display').forEach(el => el.classList.remove('active'));
+
+      // If this prompt wasn't already shown, show it
+      if (!isCurrentlyShown) {
+        textElement.textContent = promptText;
+        displayElement.classList.add('active');
+      }
+    }
+  }
+
+  // Function to attach event listeners to prompt buttons
+  function attachPromptButtonListeners(section) {
+    const selector = section ? `[data-section="${section}"]` : '.prompt-button';
+    document.querySelectorAll(selector).forEach(button => {
+      button.addEventListener('click', function() {
+        const promptId = this.getAttribute('data-prompt-id');
+        const buttonSection = this.getAttribute('data-section') || 'styles';
+        showPrompt(promptId, buttonSection);
+      });
+    });
+  }
+
+  // Attach listeners for styles section (these buttons are static in the HTML)
+  attachPromptButtonListeners('styles');
   
   const compositionExamples = [
     {
@@ -1118,12 +1399,12 @@
         {
           // label: 'Pure Bouncing',
           attributes: ['Bounciness'],
-          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce.mp4',
+          video: 'videos/composition/rubber_duck1_v2w_bounce.mp4',
         },
         {
           // label: 'Bouncing + Deforming',
           attributes: ['Bounciness', 'Deformation'],
-          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce_deform.mp4',
+          video: 'videos/composition/rubber_duck1_v2w_bounce_deform.mp4',
         }
       ]
     },
@@ -1172,6 +1453,22 @@
           // label: 'Force + friction',
           attributes: ['Force', 'Friction'],
           video: 'videos/composition/plant_slide-v3_v2w_friction_force.mp4',
+        }
+      ]
+    },
+    {
+      title: 'Layered bounciness and deformation',
+      // description: 'Start from pure bounce behavior and progressively add soft, deformable cues.',
+      variants: [
+        {
+          // label: 'Pure Bouncing',
+          attributes: ['Bounciness'],
+          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce.mp4',
+        },
+        {
+          // label: 'Bouncing + Deforming',
+          attributes: ['Bounciness', 'Deformation'],
+          video: 'videos/composition/tennis_ball_bounce_2_v2w_bounce_deform.mp4',
         }
       ]
     }
