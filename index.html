@@ -765,13 +765,99 @@
       text-align: center;
       color: #444;
     }
-    
+
     .property-meta {
       text-align: center;
       font-size: 0.8rem;
       color: #555;
       margin-top: -0.25rem;
       margin-bottom: 0.5rem;
+    }
+
+    .force-direction-selector {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto 1.5rem auto;
+      text-align: center;
+    }
+
+    .force-direction-selector-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .force-thumbnail-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 62%;
+      border-radius: 8px;
+      overflow: visible;
+      background: #f5f5f5;
+      border: 2px solid #ddd;
+    }
+
+    .force-thumbnail-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .force-arrow {
+      position: absolute;
+      width: 75px;
+      height: 48px;
+      cursor: pointer;
+      transform: translate(0%, -50%);
+      transform-origin: left center;
+      transition: all 0.2s ease;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 10;
+    }
+
+    .force-arrow:hover {
+      z-index: 100;
+    }
+
+    .force-arrow.selected {
+      z-index: 50;
+    }
+
+    .force-arrow img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      transition: all 0.2s ease;
+      transform-origin: left center;
+    }
+
+    .force-arrow:hover img {
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+      transform: scale(1.15);
+      transform-origin: left center;
+    }
+
+    .force-arrow.selected img {
+      filter: drop-shadow(0 4px 12px rgba(255, 0, 0, 0.5));
+      transform: scale(1.25);
+      transform-origin: left center;
+    }
+
+    .force-direction-info {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #444;
+      min-height: 1.2rem;
     }
 
     .interaction-banner {
@@ -2060,42 +2146,88 @@
       name: 'Force',
       description: 'Changing both magnitude and direction of the applied force modifies trajectories and contact events.',
       extraImageLabel: 'Input force direction',
+      hasForceDirections: true,
       examples: [
         {
-          label: 'Toy car · 0.51N @ 1°',
-          video: 'videos/physpropprior/force/_toycar4_v2w_force_051_angle_1.mp4',
-          extraImage: 'videos/physpropprior/force/_toycar4_v2w_force_051_angle_1_force.png',
-          // meta: 'Higher force pushes the car straight ahead.'
+          label: 'Banana slide',
+          baseVideo: 'banana_slide-v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315.mp4',
+          directions: [
+            { angle: 271, force: '051', x: 15, y: 40, label: 'Med Force @ 271°', default: true },
+            { angle: 1, force: '095', x: 15, y: 50, label: 'Med Force @ 1°', default: false },
+          ]
         },
         {
-          label: 'Toy car · 0.20N @ 225°',
-          video: 'videos/physpropprior/force/_toycar1_v2w_force_020_angle_225.mp4',
-          extraImage: 'videos/physpropprior/force/_toycar1_v2w_force_020_angle_225_force.png',
-          // meta: 'Smaller impulse + diagonal action.'
+          label: 'Bell',
+          baseVideo: 'bell_v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271.mp4',
+          directions: [
+            { angle: 1, force: '051', x: 55, y: 50, label: 'Med Force @ 1°', default: false },
+            { angle: 181, force: '051', x: 45, y: 50, label: 'Med Force @ 181°', default: false },
+            { angle: 271, force: '051', x: 50, y: 40, label: 'Med Force @ 271°', default: true }
+          ]
         },
         {
-          // label: 'Banana slide · 0.95N @ 315°',
-          video: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315.mp4',
-          extraImage: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315_force.png',
-          meta: 'Large impulse with backward/right push.'
+          label: 'Cart roll',
+          baseVideo: 'cart_roll_v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/cart_roll_v1_v2w_force_090_angle_1.mp4',
+          directions: [
+            { angle: 1, force: '090', x: 16, y: 65, label: 'High Force @ 1°', default: true }
+          ]
         },
         {
-          // label: 'Bell · 0.51N @ 271°',
-          video: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271.mp4',
-          extraImage: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271_force.png',
-          meta: 'Impulse aimed downward to slow the swing.'
+          label: 'Curling v1',
+          baseVideo: 'curling_v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269.mp4',
+          directions: [
+            { angle: 181, force: '051', x: 50, y: 70, label: 'Med Force @ 181°', default: false },
+            { angle: 225, force: '051', x: 30, y: 70, label: 'Med Force @ 225°', default: false },
+            { angle: 269, force: '051', x: 30, y: 50, label: 'Med Force @ 269°', default: true }
+          ]
         },
         {
-          label: 'Curling · 0.51N @ 269°',
-          video: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269.mp4',
-          extraImage: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269_force.png',
-          meta: 'Sideways push alters the stone curl.'
+          label: 'Curling v2',
+          baseVideo: 'curling_v2_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/curling_v2_v2w_force_051_angle_315.mp4',
+          directions: [
+            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: false },
+            { angle: 271, force: '051', x: 30, y: 50, label: '0.51N @ 271°', default: false },
+            { angle: 315, force: '051', x: 70, y: 30, label: '0.51N @ 315°', default: true }
+          ]
         },
         {
-          label: 'Cart roll · 0.90N @ 1°',
-          video: 'videos/physpropprior/force/cart_roll_v1_v2w_force_090_angle_1.mp4',
-          extraImage: 'videos/physpropprior/force/cart_roll_v1_v2w_force_090_angle_1_force.png',
-          meta: 'High magnitude straight-on push.'
+          label: 'Cup slide',
+          baseVideo: 'cup_slide-v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/cup_slide-v1_v2w_force_051_angle_1.mp4',
+          directions: [
+            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true },
+            { angle: 271, force: '051', x: 30, y: 50, label: '0.51N @ 271°', default: false }
+          ]
+        },
+        {
+          label: 'Sprite bottle',
+          baseVideo: 'sprite_v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/sprite_v1_v2w_force_051_angle_1.mp4',
+          directions: [
+            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true },
+            { angle: 181, force: '051', x: 50, y: 70, label: '0.51N @ 181°', default: false }
+          ]
+        },
+        {
+          label: 'Couch slide',
+          baseVideo: 'couch_slide_v1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/couch_slide_v1_v2w_force_051_angle_89.mp4',
+          directions: [
+            { angle: 89, force: '051', x: 70, y: 50, label: '0.51N @ 89°', default: true }
+          ]
+        },
+        {
+          label: 'Plant slide',
+          baseVideo: 'plant_slide-v2_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/plant_slide-v2_v2w_force_051_angle_1.mp4',
+          directions: [
+            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true }
+          ]
         }
       ]
     }
@@ -2289,15 +2421,48 @@
       let extraBox = null;
       let extraImage = null;
       let extraLabel = null;
+      let forceDirectionSelector = null;
+      let forceThumbnailImg = null;
+      let forceThumbnailContainer = null;
+      let forceDirectionInfo = null;
+      let currentForceDirection = null;
+
       if (layoutMode === 'single' && property.extraImageLabel) {
-        extraBox = document.createElement('div');
-        extraBox.className = 'property-extra is-hidden';
-        extraImage = document.createElement('img');
-        extraLabel = document.createElement('p');
-        extraLabel.className = 'property-extra-label';
-        extraBox.appendChild(extraImage);
-        extraBox.appendChild(extraLabel);
-        activeMedia.appendChild(extraBox);
+        if (property.hasForceDirections) {
+          // Create force direction selector - will be prepended before methodGrid
+          forceDirectionSelector = document.createElement('div');
+          forceDirectionSelector.className = 'force-direction-selector is-hidden';
+
+          const selectorLabel = document.createElement('span');
+          selectorLabel.className = 'force-direction-selector-label';
+          selectorLabel.textContent = 'Select Force Direction:';
+          forceDirectionSelector.appendChild(selectorLabel);
+
+          forceThumbnailContainer = document.createElement('div');
+          forceThumbnailContainer.className = 'force-thumbnail-container';
+
+          forceThumbnailImg = document.createElement('img');
+          forceThumbnailImg.className = 'force-thumbnail-img';
+          forceThumbnailContainer.appendChild(forceThumbnailImg);
+
+          forceDirectionSelector.appendChild(forceThumbnailContainer);
+
+          forceDirectionInfo = document.createElement('div');
+          forceDirectionInfo.className = 'force-direction-info';
+          forceDirectionSelector.appendChild(forceDirectionInfo);
+
+          // Prepend to activeMedia (will be before methodGrid)
+          activeMedia.insertBefore(forceDirectionSelector, activeMedia.firstChild);
+        } else {
+          extraBox = document.createElement('div');
+          extraBox.className = 'property-extra is-hidden';
+          extraImage = document.createElement('img');
+          extraLabel = document.createElement('p');
+          extraLabel.className = 'property-extra-label';
+          extraBox.appendChild(extraImage);
+          extraBox.appendChild(extraLabel);
+          activeMedia.appendChild(extraBox);
+        }
       }
       
       const previewCache = property.examples.map(() => null);
@@ -2319,6 +2484,22 @@
         if (Array.isArray(example?.variants) && example.variants.length) {
           return example.variants;
         }
+
+        // For force direction examples
+        if (property.hasForceDirections && example?.directions) {
+          const selectedDir = currentForceDirection || example.directions.find(d => d.default) || example.directions[0];
+          const baseVideo = example.baseVideo;
+          const videoPath = `videos/physpropprior/force/${baseVideo}_force_${selectedDir.force}_angle_${selectedDir.angle}.mp4`;
+
+          return [{
+            label: selectedDir.label,
+            video: videoPath,
+            meta: selectedDir.label,
+            extraImage: null,
+            extraImageLabel: property.extraImageLabel
+          }];
+        }
+
         return [{
           label: example?.variantLabel || example?.label,
           video: example?.video,
@@ -2334,6 +2515,9 @@
         }
         if (typeof example.previewVideo === 'string') {
           return example.previewVideo;
+        }
+        if (property.hasForceDirections && example?.thumbnailVideo) {
+          return example.thumbnailVideo;
         }
         const variants = getVariantEntries(example);
         if (variants.length && variants[0].video) {
@@ -2487,7 +2671,104 @@
           }
         }
       };
-      
+
+      const renderForceDirections = (example) => {
+        if (!forceDirectionSelector || !property.hasForceDirections || !example?.directions) {
+          if (forceDirectionSelector) {
+            forceDirectionSelector.classList.add('is-hidden');
+          }
+          return;
+        }
+
+        // Show the selector
+        forceDirectionSelector.classList.remove('is-hidden');
+
+        // Set thumbnail image - use the first frame (_ff.png) from the default direction
+        if (forceThumbnailImg && example.baseVideo && example.directions) {
+          const defaultDir = example.directions.find(d => d.default) || example.directions[0];
+          const firstFramePath = `videos/physpropprior/force/${example.baseVideo}_force_${defaultDir.force}_angle_${defaultDir.angle}_ff.png`;
+          forceThumbnailImg.src = firstFramePath;
+          forceThumbnailImg.alt = 'Force direction scene';
+        }
+
+        // Clear existing arrows
+        const existingArrows = forceThumbnailContainer.querySelectorAll('.force-arrow');
+        existingArrows.forEach(arrow => arrow.remove());
+
+        if (!forceThumbnailContainer) return;
+
+        // Add arrows for each direction
+        example.directions.forEach((direction, idx) => {
+          const arrow = document.createElement('button');
+          arrow.className = 'force-arrow';
+          arrow.type = 'button';
+          arrow.dataset.angle = direction.angle;
+          arrow.dataset.force = direction.force;
+          arrow.dataset.directionIndex = idx;
+          arrow.style.left = `${direction.x}%`;
+          arrow.style.top = `${direction.y}%`;
+          arrow.setAttribute('aria-label', direction.label);
+          arrow.title = direction.label;
+
+          // Create arrow image
+          const arrowImg = document.createElement('img');
+
+          // Check if this is the currently selected direction
+          const isSelected = currentForceDirection
+            ? (currentForceDirection.angle === direction.angle && currentForceDirection.force === direction.force)
+            : direction.default;
+
+          // Use red arrow for selected, blue for others
+          arrowImg.src = isSelected ? 'static/images/red_arrow.png' : 'static/images/blue_arrow.png';
+          arrowImg.alt = 'Force direction arrow';
+
+          // Calculate rotation based on angle
+          // Arrow images point right by default, so 0° in our system = 0° rotation
+          // The angle from the data represents the force direction
+          arrowImg.style.transform = `rotate(${direction.angle}deg)`;
+
+          arrow.appendChild(arrowImg);
+
+          if (isSelected) {
+            arrow.classList.add('selected');
+            if (forceDirectionInfo) {
+              forceDirectionInfo.textContent = direction.label;
+            }
+          }
+
+          // Add click handler
+          arrow.addEventListener('click', () => {
+            currentForceDirection = direction;
+
+            // Update all arrows - change images and selected class
+            forceThumbnailContainer.querySelectorAll('.force-arrow').forEach(a => {
+              a.classList.remove('selected');
+              const img = a.querySelector('img');
+              if (img) {
+                img.src = 'static/images/blue_arrow.png';
+              }
+            });
+
+            arrow.classList.add('selected');
+            arrowImg.src = 'static/images/red_arrow.png';
+
+            // Update info display
+            if (forceDirectionInfo) {
+              forceDirectionInfo.textContent = direction.label;
+            }
+
+            // Refresh the videos with new direction
+            const variantEntries = getVariantEntries(example);
+            for (let rowIndex = 0; rowIndex < variantRowCount; rowIndex += 1) {
+              const variantData = variantEntries[rowIndex];
+              updateVariantSlot(variantData, rowIndex);
+            }
+          });
+
+          forceThumbnailContainer.appendChild(arrow);
+        });
+      };
+
       const setActiveExample = (idx) => {
         if (!property.examples.length) {
           return;
@@ -2498,13 +2779,18 @@
         if (!example) {
           return;
         }
-        
+
+        // Reset force direction when switching examples
+        if (property.hasForceDirections && example?.directions) {
+          currentForceDirection = example.directions.find(d => d.default) || example.directions[0];
+        }
+
         const variantEntries = getVariantEntries(example);
         for (let rowIndex = 0; rowIndex < variantRowCount; rowIndex += 1) {
           const variantData = variantEntries[rowIndex];
           updateVariantSlot(variantData, rowIndex);
         }
-        
+
         const labelText = getExampleLabel(example, currentIndex);
         if (sharedLabel) {
           sharedLabel.textContent = labelText;
@@ -2519,7 +2805,10 @@
             sharedMeta.classList.add('is-hidden');
           }
         }
-        
+
+        // Render force direction selector if applicable
+        renderForceDirections(example);
+
         renderCarousel();
         renderDots();
       };
