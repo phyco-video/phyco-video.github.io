@@ -2719,7 +2719,7 @@
             : direction.default;
 
           // Use red arrow for selected, blue for others
-          arrowImg.src = isSelected ? 'static/images/red_arrow.png' : 'static/images/blue_arrow.png';
+          arrowImg.src = isSelected ? 'static/images/red_arrow.png' : 'static/images/yellow_arrow.png';
           arrowImg.alt = 'Force direction arrow';
 
           // Calculate rotation based on angle
@@ -2745,7 +2745,7 @@
               a.classList.remove('selected');
               const img = a.querySelector('img');
               if (img) {
-                img.src = 'static/images/blue_arrow.png';
+                img.src = 'static/images/yellow_arrow.png';
               }
             });
 
