@@ -853,11 +853,7 @@
     }
 
     .force-direction-info {
-      margin-top: 0.75rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #444;
-      min-height: 1.2rem;
+      display: none;
     }
 
     .interaction-banner {
@@ -2153,8 +2149,8 @@
           baseVideo: 'banana_slide-v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/banana_slide-v1_v2w_force_095_angle_315.mp4',
           directions: [
-            { angle: 271, force: '051', x: 15, y: 40, label: 'Med Force @ 271°', default: true },
-            { angle: 1, force: '095', x: 15, y: 50, label: 'Med Force @ 1°', default: false },
+            { angle: 271, force: '051', x: 15, y: 40, label: 'Force @ 271°', default: true },
+            { angle: 1, force: '095', x: 15, y: 50, label: 'Force @ 1°', default: false },
           ]
         },
         {
@@ -2162,9 +2158,9 @@
           baseVideo: 'bell_v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/bell_v1_v2w_force_051_angle_271.mp4',
           directions: [
-            { angle: 1, force: '051', x: 55, y: 50, label: 'Med Force @ 1°', default: false },
-            { angle: 181, force: '051', x: 45, y: 50, label: 'Med Force @ 181°', default: false },
-            { angle: 271, force: '051', x: 50, y: 40, label: 'Med Force @ 271°', default: true }
+            { angle: 1, force: '051', x: 55, y: 50, label: 'Force @ 1°', default: false },
+            { angle: 181, force: '051', x: 45, y: 50, label: 'Force @ 181°', default: false },
+            { angle: 271, force: '051', x: 50, y: 40, label: 'Force @ 271°', default: true }
           ]
         },
         {
@@ -2180,9 +2176,9 @@
           baseVideo: 'curling_v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/curling_v1_v2w_force_051_angle_269.mp4',
           directions: [
-            { angle: 181, force: '051', x: 50, y: 70, label: 'Med Force @ 181°', default: false },
-            { angle: 225, force: '051', x: 30, y: 70, label: 'Med Force @ 225°', default: false },
-            { angle: 269, force: '051', x: 30, y: 50, label: 'Med Force @ 269°', default: true }
+            { angle: 269, force: '051', x: 80, y: 60, label: 'Force @ 269°', default: true },
+            { angle: 181, force: '051', x: 75, y: 70, label: 'Force @ 181°', default: false },
+            { angle: 225, force: '051', x: 75, y: 60, label: 'Force @ 225°', default: false }
           ]
         },
         {
@@ -2190,9 +2186,9 @@
           baseVideo: 'curling_v2_v2w',
           thumbnailVideo: 'videos/physpropprior/force/curling_v2_v2w_force_051_angle_315.mp4',
           directions: [
-            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: false },
-            { angle: 271, force: '051', x: 30, y: 50, label: '0.51N @ 271°', default: false },
-            { angle: 315, force: '051', x: 70, y: 30, label: '0.51N @ 315°', default: true }
+            { angle: 271, force: '051', x: 25, y: 60, label: 'Force @ 271°', default: false },
+            { angle: 315, force: '051', x: 35, y: 60, label: 'Force @ 315°', default: true },
+            { angle: 1, force: '051', x: 25, y: 80, label: 'Force @ 1°', default: false }
           ]
         },
         {
@@ -2200,8 +2196,8 @@
           baseVideo: 'cup_slide-v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/cup_slide-v1_v2w_force_051_angle_1.mp4',
           directions: [
-            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true },
-            { angle: 271, force: '051', x: 30, y: 50, label: '0.51N @ 271°', default: false }
+            { angle: 1, force: '051', x: 20, y: 55, label: 'Force @ 1°', default: true },
+            { angle: 271, force: '051', x: 20, y: 45, label: 'Force @ 271°', default: false }
           ]
         },
         {
@@ -2209,8 +2205,8 @@
           baseVideo: 'sprite_v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/sprite_v1_v2w_force_051_angle_1.mp4',
           directions: [
-            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true },
-            { angle: 181, force: '051', x: 50, y: 70, label: '0.51N @ 181°', default: false }
+            { angle: 1, force: '051', x: 55, y: 65, label: 'Force @ 1°', default: true },
+            { angle: 181, force: '051', x: 45, y: 65, label: 'Force @ 181°', default: false }
           ]
         },
         {
@@ -2218,15 +2214,26 @@
           baseVideo: 'couch_slide_v1_v2w',
           thumbnailVideo: 'videos/physpropprior/force/couch_slide_v1_v2w_force_051_angle_89.mp4',
           directions: [
-            { angle: 89, force: '051', x: 70, y: 50, label: '0.51N @ 89°', default: true }
+            { angle: 89, force: '051', x: 28, y: 50, label: 'Force @ 89°', default: true },
+            { angle: 1, force: '051', x: 32, y: 50, label: 'Force @ 1°', default: true }
           ]
         },
         {
-          label: 'Plant slide',
-          baseVideo: 'plant_slide-v2_v2w',
-          thumbnailVideo: 'videos/physpropprior/force/plant_slide-v2_v2w_force_051_angle_1.mp4',
+          label: 'Cube slide',
+          baseVideo: '_materialexpcube1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/_materialexpcube1_v2w_force_051_angle_271.mp4',
           directions: [
-            { angle: 1, force: '051', x: 50, y: 30, label: '0.51N @ 1°', default: true }
+            { angle: 271, force: '051', x: 28, y: 55, label: 'Force @ 271°', default: true },
+            { angle: 315, force: '051', x: 30, y: 63, label: 'Force @ 315°', default: false }
+          ]
+        },
+        {
+          label: 'Laundry basket slide',
+          baseVideo: '_materialexplaundrybasket1_v2w',
+          thumbnailVideo: 'videos/physpropprior/force/_materialexplaundrybasket1_v2w_force_051_angle_179.mp4',
+          directions: [
+            { angle: 260, force: '051', x: 75, y: 80, label: 'Force @ 260°', default: true },
+            { angle: 179, force: '051', x: 70, y: 85, label: 'Force @ 179°', default: false }
           ]
         }
       ]
@@ -2494,7 +2501,7 @@
           return [{
             label: selectedDir.label,
             video: videoPath,
-            meta: selectedDir.label,
+            meta: '',
             extraImage: null,
             extraImageLabel: property.extraImageLabel
           }];
