@@ -290,6 +290,48 @@
       letter-spacing: 0.05em;
     }
     
+    .property-carousel-wrapper {
+      width: 100%;
+      margin-bottom: 1.25rem;
+    }
+    
+    .property-carousel-nav {
+      display: flex;
+      gap: 0.85rem;
+      align-items: stretch;
+      width: 100%;
+    }
+    
+    .property-carousel-nav .fine-control-nav {
+      flex: 0 0 auto;
+    }
+    
+    .property-nav-track {
+      flex: 1 1 auto;
+    }
+    
+    .property-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .property-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #3273dc;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    
+    .property-dot.is-active {
+      background: #3273dc;
+    }
+    
     @media (max-width: 768px) {
       .fine-control-carousel {
         flex-direction: column;
@@ -389,65 +431,11 @@
       margin-bottom: 0.75rem;
     }
     
-    .thumbnail-carousel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin: 0.5rem auto 1rem;
-      max-width: 780px;
-      padding: 0.5rem 0.75rem;
-      background: #f9fbff;
-      border-radius: 999px;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
-    }
-    
-    .carousel-button {
-      border: none;
-      background: #e0e9fb;
-      color: #1d4f91;
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-    
-    .carousel-button:hover {
-      background: #c5d6fb;
-      transform: translateY(-1px);
-    }
-    
-    .carousel-button:disabled {
-      opacity: 0.4;
-      cursor: default;
-      transform: none;
-    }
-    
     .thumbnail-track {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      min-width: 0;
-      flex: 1;
-      padding: 0 0.25rem;
-    }
-    
-    .thumbnail-track.is-shifting {
-      animation-duration: 0.35s;
-      animation-timing-function: ease;
-    }
-    
-    .thumbnail-track.is-shifting-left {
-      animation-name: carousel-shift-left;
-    }
-    
-    .thumbnail-track.is-shifting-right {
-      animation-name: carousel-shift-right;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      width: 100%;
     }
     
     .thumbnail-card {
@@ -455,7 +443,6 @@
       border-radius: 12px;
       padding: 0.35rem;
       background: #f7f9fc;
-      width: 135px;
       cursor: pointer;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
       position: relative;
@@ -463,13 +450,14 @@
       flex-direction: column;
       gap: 0.3rem;
       opacity: 0.7;
+      width: 100%;
     }
     
     .thumbnail-card.current {
       border-color: #00b4d8;
-      box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+      box-shadow: 0 2px 10px rgba(0, 180, 216, 0.2);
       background: #fff;
-      transform: scale(1.05);
+      transform: translateY(-2px);
       opacity: 1;
       cursor: default;
     }
@@ -576,48 +564,97 @@
       position: relative;
     }
     
-    .variant-row.has-badge {
-      padding-left: 0;
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 1rem 0 1.5rem;
+    }
+    
+    .method-column {
+      border-radius: 16px;
+      border: 1px solid #dbe4ff;
+      background: #f8faff;
+      padding: 0.85rem 0.85rem 1rem;
+      box-shadow: 0 6px 18px rgba(74, 97, 155, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    
+    .method-column.is-baseline.baseline-0 {
+      background: #fdf9ff;
+      border-color: rgba(192, 153, 255, 0.6);
+    }
+    
+    .method-column.is-baseline.baseline-1 {
+      background: #f6fbff;
+      border-color: rgba(118, 191, 255, 0.6);
+    }
+    
+    .method-column.is-primary {
+      background: linear-gradient(180deg, rgba(50, 115, 220, 0.12), rgba(50, 115, 220, 0.02));
+      border: 2px solid rgba(50, 115, 220, 0.35);
+      box-shadow: 0 12px 30px rgba(50, 115, 220, 0.18);
+    }
+    
+    .method-heading {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      color: #1f2a44;
+    }
+    
+    .method-variant-stack {
+      display: flex;
+      flex-direction: column;
       gap: 0.75rem;
     }
     
-    .variant-badge-column {
-      flex: 0 0 38px;
+    .method-variant-slot {
       display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .variant-tag {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(50, 115, 220, 0.15);
+      color: #1d2e53;
+      border-radius: 999px;
+      padding: 0.35rem 0.2rem;
+      min-height: 70px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
     }
     
-    .variant-badge {
-      display: inline-block;
-      transform: rotate(-90deg);
-      background: #fff;
-      padding: 0.3rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid #d0d8f0;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: #1d4f91;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
+    .method-column.is-baseline.baseline-0 .variant-tag {
+      background: rgba(192, 153, 255, 0.2);
+      color: #40215f;
     }
     
-    .variant-row.is-hidden {
-      display: none;
+    .method-column.is-baseline.baseline-1 .variant-tag {
+      background: rgba(118, 191, 255, 0.2);
+      color: #1b3c6b;
     }
     
-    .variant-row-label {
-      width: 100%;
-      text-align: center;
-      font-weight: 600;
-      color: #1d4f91;
-      margin: 0 0 0.15rem 0;
-      letter-spacing: 0.01em;
+    .method-column.is-primary .variant-tag {
+      background: rgba(50, 115, 220, 0.28);
+      color: #10244a;
     }
     
-    .variant-row.has-badge .variant-row-label {
-      display: none;
+    .method-variant-slot .video-wrapper {
+      margin: 0;
+      flex: 1 1 auto;
     }
     
     .variant-row-meta {
@@ -632,35 +669,13 @@
       display: none;
     }
     
-    .comparison-video {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1 1 210px;
-      max-width: 250px;
-      gap: 0.2rem;
-    }
-    
-    .comparison-video.baseline,
-    .comparison-video.primary {
-      flex: 1 1 220px;
-      max-width: 260px;
-    }
-    
-    .comparison-video .video-label {
-      display: none;
-    }
-    
-    .property-video {
-      width: 100%;
-    }
-    
     .property-video-wrapper {
       padding-bottom: 56%;
       border-radius: 12px;
       background: #000;
       max-width: 260px;
       margin: 0 auto 0.35rem;
+      border: 2px solid transparent;
     }
     
     .property-extra {
@@ -758,23 +773,28 @@
         align-items: center;
       }
     
-      .thumbnail-carousel {
+      .property-carousel-nav {
         flex-direction: column;
-        gap: 0.5rem;
       }
-    
-      .thumbnail-track {
+      
+      .property-nav-track {
         width: 100%;
       }
-    
+      
       .thumbnail-card {
-        width: 70%;
+        width: 100%;
       }
-    
-      .comparison-video.baseline,
+      
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .method-column {
+        width: 100%;
+      }
+      
       .property-extra {
-        max-width: 70%;
-        flex: 1 1 80%;
+        max-width: 80%;
       }
     }
   </style>
@@ -874,7 +894,7 @@
     
     <div class="example-container property-gallery">
       <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparisons </h2>
+        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparison</h2>
       </div>
       <!-- <div class="explanation-text">
         <p>
@@ -1659,6 +1679,7 @@
         },
         {
           label: 'Trampoline v2',
+          meta: 'High bounce',
           variants: [
             {
               label: 'Low bounce',
@@ -1781,19 +1802,20 @@
       panel.innerHTML = `
         <h3><b>${property.name}</b></h3>
         <small>${property.description || ''}</small>
+        <div class="property-carousel-wrapper">
+          <div class="property-carousel-nav">
+            <button class="fine-control-nav property-nav-btn is-prev" aria-label="Previous example">&lsaquo;</button>
+            <div class="property-nav-track">
+              <div class="thumbnail-track"></div>
+            </div>
+            <button class="fine-control-nav property-nav-btn is-next" aria-label="Next example">&rsaquo;</button>
+          </div>
+          <div class="property-dots"></div>
+        </div>
         <div class="property-active-media"></div>
         <div class="property-shared-info">
           <!-- <p class="property-shared-label"></p> -->
           <p class="property-shared-meta"></p>
-        </div>
-        <div class="thumbnail-carousel">
-          <button class="carousel-button is-left" aria-label="Previous example">
-            <span class="icon"><i class="fas fa-chevron-left"></i></span>
-          </button>
-          <div class="thumbnail-track"></div>
-          <button class="carousel-button is-right" aria-label="Next example">
-            <span class="icon"><i class="fas fa-chevron-right"></i></span>
-          </button>
         </div>
       `;
       
@@ -1803,60 +1825,53 @@
       const sharedLabel = panel.querySelector('.property-shared-label');
       const sharedMeta = panel.querySelector('.property-shared-meta');
       const carouselTrack = panel.querySelector('.thumbnail-track');
-      const prevButton = panel.querySelector('.carousel-button.is-left');
-      const nextButton = panel.querySelector('.carousel-button.is-right');
+      const prevButton = panel.querySelector('.property-nav-btn.is-prev');
+      const nextButton = panel.querySelector('.property-nav-btn.is-next');
+      const dotsContainer = panel.querySelector('.property-dots');
       const propertySlug = (property.slug || property.name || '').toLowerCase().replace(/\s+/g, '');
       const layoutMode = property.layout === 'paired' ? 'paired' : 'single';
       const variantRowCount = layoutMode === 'paired' ? 2 : 1;
-      const variantRows = [];
       
-      const modelHeadingRow = document.createElement('div');
-      modelHeadingRow.className = 'model-heading-row';
-      BASELINE_MODELS.forEach(model => {
+      const methodConfigs = [
+        ...BASELINE_MODELS.map((model, index) => ({
+          key: model.key,
+          label: model.label,
+          type: 'baseline',
+          colorClass: `baseline-${index}`
+        })),
+        { key: 'phyco', label: 'PhyCo (Ours)', type: 'primary', colorClass: 'is-primary' }
+      ];
+      
+      const methodGrid = document.createElement('div');
+      methodGrid.className = `method-grid layout-${layoutMode}`;
+      activeMedia.appendChild(methodGrid);
+      
+      const methodEntries = [];
+      
+      methodConfigs.forEach((config, index) => {
+        const column = document.createElement('div');
+        column.className = `method-column ${config.type === 'primary' ? 'is-primary' : 'is-baseline'} ${config.colorClass || ''}`;
         const heading = document.createElement('div');
-        heading.className = 'model-heading';
-        heading.textContent = model.label;
-        modelHeadingRow.appendChild(heading);
-      });
-      const phycoHeading = document.createElement('div');
-      phycoHeading.className = 'model-heading';
-      phycoHeading.textContent = 'PhyCo';
-      modelHeadingRow.appendChild(phycoHeading);
-      activeMedia.appendChild(modelHeadingRow);
-      
-      const createVariantRow = (rowIndex, options = {}) => {
-        const { includeExtra = false } = options;
-        const row = document.createElement('div');
-        row.className = 'variant-row';
-        let badgeEl = null;
-        if (layoutMode === 'paired') {
-          row.classList.add('has-badge');
-          const badgeColumn = document.createElement('div');
-          badgeColumn.className = 'variant-badge-column';
-          badgeEl = document.createElement('div');
-          badgeEl.className = 'variant-badge';
-          badgeColumn.appendChild(badgeEl);
-          row.appendChild(badgeColumn);
-        }
+        heading.className = 'method-heading';
+        heading.textContent = config.label;
+        column.appendChild(heading);
         
-        const shouldShowRowLabel = layoutMode === 'paired';
-        const rowLabel = shouldShowRowLabel ? document.createElement('p') : null;
-        if (rowLabel) {
-          rowLabel.className = 'variant-row-label';
-          row.appendChild(rowLabel);
-        }
+        const stack = document.createElement('div');
+        stack.className = 'method-variant-stack';
+        column.appendChild(stack);
         
-        const baselineRefs = BASELINE_MODELS.map(model => {
-          const column = document.createElement('div');
-          column.className = 'comparison-video baseline';
+        const variantRefs = [];
+        
+        for (let rowIndex = 0; rowIndex < variantRowCount; rowIndex += 1) {
+          const slot = document.createElement('div');
+          slot.className = 'method-variant-slot';
           
-          const labelEl = document.createElement('p');
-          labelEl.className = 'video-label';
-          labelEl.textContent = model.label;
-          column.appendChild(labelEl);
+          const tag = document.createElement('span');
+          tag.className = 'variant-tag';
+          slot.appendChild(tag);
           
           const wrapper = document.createElement('div');
-          wrapper.className = 'video-wrapper baseline-video-wrapper';
+          wrapper.className = `video-wrapper ${config.type === 'primary' ? 'property-video-wrapper' : 'baseline-video-wrapper'}`;
           
           const video = document.createElement('video');
           video.controls = true;
@@ -1865,86 +1880,58 @@
           video.autoplay = true;
           video.muted = true;
           video.loop = true;
-          video.setAttribute('aria-label', `${model.label} baseline preview`);
-          video.dataset.model = model.key;
-          video.dataset.row = String(rowIndex);
+          if (config.type !== 'primary') {
+            video.dataset.model = config.key;
+            video.dataset.row = String(rowIndex);
+          }
           const source = document.createElement('source');
           source.type = 'video/mp4';
           video.appendChild(source);
           wrapper.appendChild(video);
+          slot.appendChild(wrapper);
           
-          column.appendChild(wrapper);
-          row.appendChild(column);
+          stack.appendChild(slot);
           
-          return { key: model.key, element: video, source, labelEl };
-        });
-        
-        const phycoColumn = document.createElement('div');
-        phycoColumn.className = 'comparison-video property-video primary';
-        const phycoLabel = document.createElement('p');
-        phycoLabel.className = 'video-label';
-        phycoLabel.textContent = 'PhyCo';
-        const phycoWrapper = document.createElement('div');
-        phycoWrapper.className = 'video-wrapper property-video-wrapper';
-        const phycoVideo = document.createElement('video');
-        phycoVideo.controls = true;
-        phycoVideo.preload = 'metadata';
-        phycoVideo.playsInline = true;
-        phycoVideo.autoplay = true;
-        phycoVideo.muted = true;
-        phycoVideo.loop = true;
-        const phycoSource = document.createElement('source');
-        phycoSource.type = 'video/mp4';
-        phycoVideo.appendChild(phycoSource);
-        phycoWrapper.appendChild(phycoVideo);
-        phycoColumn.appendChild(phycoLabel);
-        phycoColumn.appendChild(phycoWrapper);
-        row.appendChild(phycoColumn);
-        
-        let extraBox = null;
-        let extraImage = null;
-        let extraLabel = null;
-        if (includeExtra) {
-          extraBox = document.createElement('div');
-          extraBox.className = 'comparison-video property-extra is-hidden';
-          extraImage = document.createElement('img');
-          extraLabel = document.createElement('p');
-          extraLabel.className = 'property-extra-label';
-          extraBox.appendChild(extraImage);
-          extraBox.appendChild(extraLabel);
-          row.appendChild(extraBox);
+          variantRefs.push({
+            slot,
+            tagEl: tag,
+            video,
+            source
+          });
         }
         
-        const variantMeta = document.createElement('p');
-        variantMeta.className = 'variant-row-meta is-hidden';
-        row.appendChild(variantMeta);
-        
-        return {
-          container: row,
-          labelEl: rowLabel,
-          metaEl: variantMeta,
-          phycoLabelEl: phycoLabel,
-          phycoVideo,
-          phycoSource,
-          baselineRefs,
-          badgeEl,
-          extraBox,
-          extraImage,
-          extraLabel
-        };
-      };
-      
-      for (let rowIdx = 0; rowIdx < variantRowCount; rowIdx += 1) {
-        const rowConfig = createVariantRow(rowIdx, {
-          includeExtra: layoutMode === 'single' && !!property.extraImageLabel && rowIdx === 0
+        methodGrid.appendChild(column);
+        methodEntries.push({
+          config,
+          column,
+          headingEl: heading,
+          variantRefs
         });
-        variantRows.push(rowConfig);
-        activeMedia.appendChild(rowConfig.container);
+      });
+      
+      const variantMetaEls = Array.from({ length: variantRowCount }, () => {
+        const metaEl = document.createElement('p');
+        metaEl.className = 'variant-row-meta is-hidden';
+        activeMedia.appendChild(metaEl);
+        return metaEl;
+      });
+      
+      let extraBox = null;
+      let extraImage = null;
+      let extraLabel = null;
+      if (layoutMode === 'single' && property.extraImageLabel) {
+        extraBox = document.createElement('div');
+        extraBox.className = 'property-extra is-hidden';
+        extraImage = document.createElement('img');
+        extraLabel = document.createElement('p');
+        extraLabel.className = 'property-extra-label';
+        extraBox.appendChild(extraImage);
+        extraBox.appendChild(extraLabel);
+        activeMedia.appendChild(extraBox);
       }
       
       const previewCache = property.examples.map(() => null);
       let currentIndex = 0;
-      let isAnimating = false;
       
       const getExampleLabel = (example, idx) => {
         if (example && typeof example.label === 'string' && example.label.trim().length > 0) {
@@ -1985,48 +1972,25 @@
         return example.video || '';
       };
       
-      const getOffsets = () => {
-        const total = property.examples.length;
-        if (!total) {
-          return [];
-        }
-        let visibleSlots = Math.min(total, 5);
-        if (visibleSlots % 2 === 0 && total > visibleSlots) {
-          visibleSlots -= 1;
-        }
-        if (visibleSlots % 2 === 1) {
-          const halfWindow = Math.floor(visibleSlots / 2);
-          return Array.from({ length: visibleSlots }, (_, idx) => idx - halfWindow);
-        }
-        const start = -(visibleSlots / 2) + 1;
-        return Array.from({ length: visibleSlots }, (_, idx) => start + idx);
-      };
-      
       const renderCarousel = () => {
         if (!carouselTrack) {
           return;
         }
         const total = property.examples.length;
         carouselTrack.innerHTML = '';
+        if (prevButton) prevButton.disabled = total <= 1;
+        if (nextButton) nextButton.disabled = total <= 1;
         if (!total) {
-          if (prevButton) prevButton.disabled = true;
-          if (nextButton) nextButton.disabled = true;
           return;
         }
-        const offsets = getOffsets();
-        if (prevButton) prevButton.disabled = total === 1;
-        if (nextButton) nextButton.disabled = total === 1;
         
-        offsets.forEach(offset => {
-          const dataIndex = (currentIndex + offset + total) % total;
-          const example = property.examples[dataIndex];
-          const role = offset === 0 ? 'current' : (offset < 0 ? 'prev' : 'next');
+        property.examples.forEach((example, dataIndex) => {
           const card = document.createElement('button');
           card.type = 'button';
           card.className = 'thumbnail-card';
           card.setAttribute('aria-label', `Show ${getExampleLabel(example, dataIndex)}`);
           
-          if (role === 'current') {
+          if (dataIndex === currentIndex) {
             card.classList.add('current');
             card.disabled = true;
             card.setAttribute('aria-current', 'true');
@@ -2049,11 +2013,8 @@
           labelSpan.textContent = getExampleLabel(example, dataIndex);
           card.appendChild(labelSpan);
           
-          if (role !== 'current') {
+          if (dataIndex !== currentIndex) {
             card.addEventListener('click', () => {
-              if (isAnimating) {
-                return;
-              }
               setActiveExample(dataIndex);
             });
           }
@@ -2062,29 +2023,25 @@
         });
       };
       
+      const renderDots = () => {
+        if (!dotsContainer) {
+          return;
+        }
+        dotsContainer.innerHTML = '';
+        property.examples.forEach((example, index) => {
+          const dot = document.createElement('button');
+          dot.className = 'property-dot' + (index === currentIndex ? ' is-active' : '');
+          dot.setAttribute('aria-label', `Go to ${getExampleLabel(example, index)}`);
+          dot.addEventListener('click', () => setActiveExample(index));
+          dotsContainer.appendChild(dot);
+        });
+      };
+      
       const shiftCarousel = (delta) => {
-        const total = property.examples.length;
-        if (!total) {
+        if (!property.examples.length) {
           return;
         }
-        const targetIndex = (currentIndex + delta + total) % total;
-        if (!carouselTrack || isAnimating) {
-          if (!isAnimating) {
-            setActiveExample(targetIndex);
-          }
-          return;
-        }
-        isAnimating = true;
-        const direction = delta > 0 ? 'right' : 'left';
-        const shiftClass = direction === 'right' ? 'is-shifting-right' : 'is-shifting-left';
-        carouselTrack.classList.add('is-shifting', shiftClass);
-        const handleAnimationEnd = () => {
-          carouselTrack.classList.remove('is-shifting', shiftClass);
-          carouselTrack.removeEventListener('animationend', handleAnimationEnd);
-          isAnimating = false;
-          setActiveExample(targetIndex);
-        };
-        carouselTrack.addEventListener('animationend', handleAnimationEnd, { once: true });
+        setActiveExample(currentIndex + delta);
       };
       
       if (prevButton) {
@@ -2094,79 +2051,69 @@
         nextButton.addEventListener('click', () => shiftCarousel(1));
       }
       
-      const updateVariantRow = (rowInfo, variantData, rowIndex) => {
-        if (!rowInfo) {
-          return;
-        }
-        if (!variantData || !variantData.video) {
-          rowInfo.container.classList.add('is-hidden');
-          return;
-        }
-        rowInfo.container.classList.remove('is-hidden');
+      const updateVariantSlot = (variantData, rowIndex) => {
         const fallbackLabel = layoutMode === 'paired'
           ? (rowIndex === 0 ? 'High value' : 'Low value')
-          : (variantData.label || property.name || 'Example');
-        const rowLabelText = (variantData.label || fallbackLabel || '').trim();
-        if (rowInfo.labelEl) {
-          rowInfo.labelEl.textContent = rowLabelText;
-        }
+          : (variantData?.label || property.name || 'Example');
+        const rowLabelText = (variantData?.label || fallbackLabel || '').trim();
+        const badgeText = (variantData?.badge || rowLabelText || (rowIndex === 0 ? 'High' : 'Low'))
+          .replace(/value/i, '')
+          .trim() || (rowIndex === 0 ? 'High' : 'Low');
         
-        if (rowInfo.badgeEl) {
-          const badgeText = (variantData.badge || rowLabelText || (rowIndex === 0 ? 'High' : 'Low'))
-            .replace(/value/i, '')
-            .trim() || (rowIndex === 0 ? 'High' : 'Low');
-          rowInfo.badgeEl.textContent = badgeText;
-        }
-        
-        if (rowInfo.metaEl) {
-          if (variantData.meta) {
-            rowInfo.metaEl.textContent = variantData.meta;
-            rowInfo.metaEl.classList.remove('is-hidden');
-          } else {
-            rowInfo.metaEl.textContent = '';
-            rowInfo.metaEl.classList.add('is-hidden');
-          }
-        }
-        
-        if (rowInfo.phycoLabelEl) {
-          rowInfo.phycoLabelEl.textContent = variantData.phycoLabel || `PhyCo · ${rowLabelText}`;
-        }
-        
-        const phycoSrc = variantData.video || '';
-        rowInfo.phycoSource.src = phycoSrc;
-        rowInfo.phycoVideo.load();
-        rowInfo.phycoVideo.playbackRate = DEFAULT_VIDEO_SPEED;
-        if (typeof rowInfo.phycoVideo.play === 'function') {
-          rowInfo.phycoVideo.play().catch(() => {});
-        }
-        
-        const filename = phycoSrc ? phycoSrc.split('/').pop() : '';
-        rowInfo.baselineRefs.forEach(({ key, element, source }) => {
-          if (!element || !source || !filename) {
-            if (source) {
-              source.removeAttribute('src');
-              element.load();
-            }
+        methodEntries.forEach(entry => {
+          const slotRef = entry.variantRefs[rowIndex];
+          if (!slotRef) {
             return;
           }
-          const baselineSrc = `videos/${key}/${propertySlug}/${filename}`;
-          source.src = baselineSrc;
-          element.load();
-          element.playbackRate = DEFAULT_VIDEO_SPEED;
-          if (typeof element.play === 'function') {
-            element.play().catch(() => {});
+          if (!variantData || !variantData.video) {
+            slotRef.slot.classList.add('is-hidden');
+            if (slotRef.source) {
+              slotRef.source.removeAttribute('src');
+            }
+            slotRef.video.load();
+            return;
+          }
+          slotRef.slot.classList.remove('is-hidden');
+          slotRef.tagEl.textContent = badgeText;
+          
+          let videoSrc = '';
+          if (entry.config.type === 'primary') {
+            videoSrc = variantData.video || '';
+          } else {
+            const filename = variantData.video ? variantData.video.split('/').pop() : '';
+            videoSrc = filename ? `videos/${entry.config.key}/${propertySlug}/${filename}` : '';
+          }
+          
+          if (slotRef.source) {
+            slotRef.source.src = videoSrc;
+          }
+          slotRef.video.load();
+          slotRef.video.playbackRate = DEFAULT_VIDEO_SPEED;
+          if (typeof slotRef.video.play === 'function') {
+            slotRef.video.play().catch(() => {});
           }
         });
         
-        if (rowInfo.extraBox) {
-          if (variantData.extraImage) {
-            rowInfo.extraImage.src = variantData.extraImage;
-            rowInfo.extraImage.alt = variantData.extraImageLabel || property.extraImageLabel || `${rowLabelText} reference`;
-            rowInfo.extraLabel.textContent = variantData.extraImageLabel || property.extraImageLabel || 'Reference image';
-            rowInfo.extraBox.classList.remove('is-hidden');
+        const metaEl = variantMetaEls[rowIndex];
+        if (metaEl) {
+          if (variantData && variantData.meta) {
+            metaEl.textContent = variantData.meta;
+            metaEl.classList.remove('is-hidden');
           } else {
-            rowInfo.extraImage.removeAttribute('src');
-            rowInfo.extraBox.classList.add('is-hidden');
+            metaEl.textContent = '';
+            metaEl.classList.add('is-hidden');
+          }
+        }
+        
+        if (extraBox && extraImage && extraLabel && rowIndex === 0) {
+          if (variantData && variantData.extraImage) {
+            extraImage.src = variantData.extraImage;
+            extraImage.alt = variantData.extraImageLabel || property.extraImageLabel || `${rowLabelText} reference`;
+            extraLabel.textContent = variantData.extraImageLabel || property.extraImageLabel || 'Reference image';
+            extraBox.classList.remove('is-hidden');
+          } else {
+            extraImage.removeAttribute('src');
+            extraBox.classList.add('is-hidden');
           }
         }
       };
@@ -2183,14 +2130,10 @@
         }
         
         const variantEntries = getVariantEntries(example);
-        variantRows.forEach((rowInfo, rowIndex) => {
+        for (let rowIndex = 0; rowIndex < variantRowCount; rowIndex += 1) {
           const variantData = variantEntries[rowIndex];
-          if (!variantData) {
-            rowInfo.container.classList.add('is-hidden');
-            return;
-          }
-          updateVariantRow(rowInfo, variantData, rowIndex);
-        });
+          updateVariantSlot(variantData, rowIndex);
+        }
         
         const labelText = getExampleLabel(example, currentIndex);
         if (sharedLabel) {
@@ -2208,6 +2151,7 @@
         }
         
         renderCarousel();
+        renderDots();
       };
       
       setActiveExample(0);
