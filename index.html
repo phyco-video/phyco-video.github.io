@@ -572,6 +572,23 @@
       max-width: 100%;
     }
 
+    /* Force property specific grid - 4 columns in one row using full width */
+    .method-grid.force-layout {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    /* On medium screens (tablets), force-layout uses 2 columns */
+    @media screen and (max-width: 1200px) and (min-width: 769px) {
+      .method-grid.force-layout {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     .method-column {
       border-radius: 16px;
       border: 1px solid #dbe4ff;
@@ -593,7 +610,12 @@
       background: #f6fbff;
       border-color: rgba(118, 191, 255, 0.6);
     }
-    
+
+    .method-column.is-baseline.baseline-2 {
+      background: #fffaf5;
+      border-color: rgba(255, 179, 102, 0.6);
+    }
+
     .method-column.is-primary {
       background: linear-gradient(180deg, rgba(50, 115, 220, 0.12), rgba(50, 115, 220, 0.02));
       border: 2px solid rgba(50, 115, 220, 0.35);
@@ -653,7 +675,12 @@
       background: rgba(118, 191, 255, 0.2);
       color: #1b3c6b;
     }
-    
+
+    .method-column.is-baseline.baseline-2 .variant-tag {
+      background: rgba(255, 179, 102, 0.2);
+      color: #663d00;
+    }
+
     .method-column.is-primary .variant-tag {
       background: rgba(50, 115, 220, 0.28);
       color: #10244a;
@@ -697,7 +724,25 @@
       padding-bottom: 45%;
       margin: 0 auto;
     }
-    
+
+    /* Force layout - ensure columns and videos use full width */
+    .method-grid.force-layout .method-column {
+      width: 100%;
+      max-width: none;
+    }
+
+    .method-grid.force-layout .property-video-wrapper,
+    .method-grid.force-layout .baseline-video-wrapper {
+      max-width: none;
+      width: 100%;
+      padding-bottom: 56%;
+    }
+
+    .method-grid.force-layout .method-variant-slot .video-wrapper {
+      max-width: none;
+      width: 100%;
+    }
+
     .property-extra {
       width: 100%;
       max-width: 200px;
@@ -2149,9 +2194,15 @@
       const propertySlug = (property.slug || property.name || '').toLowerCase().replace(/\s+/g, '');
       const layoutMode = property.layout === 'paired' ? 'paired' : 'single';
       const variantRowCount = layoutMode === 'paired' ? 2 : 1;
-      
+
+      // Add force_prompting baseline only for Force property
+      let baselineModels = [...BASELINE_MODELS];
+      if (property.name === 'Force') {
+        baselineModels.push({ key: 'force_prompting', label: 'Force prompting' });
+      }
+
       const methodConfigs = [
-        ...BASELINE_MODELS.map((model, index) => ({
+        ...baselineModels.map((model, index) => ({
           key: model.key,
           label: model.label,
           type: 'baseline',
@@ -2161,7 +2212,8 @@
       ];
       
       const methodGrid = document.createElement('div');
-      methodGrid.className = `method-grid layout-${layoutMode}`;
+      const forceLayoutClass = property.name === 'Force' ? ' force-layout' : '';
+      methodGrid.className = `method-grid layout-${layoutMode}${forceLayoutClass}`;
       activeMedia.appendChild(methodGrid);
       
       const methodEntries = [];
