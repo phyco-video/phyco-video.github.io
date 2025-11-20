@@ -1130,11 +1130,15 @@
         <h2 class="title is-3" style="text-align:center; width: 100%;">Compositionality of Physical Attributes</h2>
       </div>
       <div class="fine-control-carousel">
-        <button class="fine-control-nav" id="composition-prev" aria-label="Previous example">&lsaquo;</button>
         <div class="fine-control-content" id="composition-content"></div>
+      </div>
+      <div class="property-carousel-nav">
+        <button class="fine-control-nav" id="composition-prev" aria-label="Previous example">&lsaquo;</button>
+        <div class="property-nav-track">
+          <div class="thumbnail-track" id="composition-thumbnails"></div>
+        </div>
         <button class="fine-control-nav" id="composition-next" aria-label="Next example">&rsaquo;</button>
       </div>
-      <div class="fine-control-dots" id="composition-dots"></div>
     </div>
     
     <div class="example-container property-gallery">
@@ -1602,11 +1606,12 @@
   ];
   
   const compositionContent = document.getElementById('composition-content');
-  const compositionDotsContainer = document.getElementById('composition-dots');
+  const compositionThumbnailsContainer = document.getElementById('composition-thumbnails');
   const compositionPrevBtn = document.getElementById('composition-prev');
   const compositionNextBtn = document.getElementById('composition-next');
   let compositionIndex = 0;
-  
+  const compositionPreviewCache = {};
+
   function renderCompositionExample() {
     const example = compositionExamples[compositionIndex];
     const cards = example.variants.map(variant => `
@@ -1620,7 +1625,7 @@
         </div>
       </div>
     `).join('');
-    
+
     compositionContent.innerHTML = `
       <div class="fine-control-example-title">
         <h3 class="title is-4" style="margin-bottom: 0.25rem;">${example.title}</h3>
@@ -1631,32 +1636,60 @@
       </div>
     `;
   }
-  
-  function renderCompositionDots() {
-    compositionDotsContainer.innerHTML = '';
+
+  function renderCompositionThumbnails() {
+    compositionThumbnailsContainer.innerHTML = '';
     compositionExamples.forEach((example, index) => {
-      const dot = document.createElement('button');
-      dot.className = 'fine-control-dot' + (index === compositionIndex ? ' is-active' : '');
-      dot.setAttribute('aria-label', `Go to ${example.title}`);
-      dot.addEventListener('click', () => {
-        compositionIndex = index;
-        renderCompositionExample();
-        renderCompositionDots();
-      });
-      compositionDotsContainer.appendChild(dot);
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'thumbnail-card';
+      card.setAttribute('aria-label', `Show ${example.title}`);
+
+      if (index === compositionIndex) {
+        card.classList.add('current');
+        card.setAttribute('aria-current', 'true');
+      }
+
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'thumbnail-image';
+
+      let canvas = compositionPreviewCache[index];
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        compositionPreviewCache[index] = canvas;
+        card.classList.add('loading');
+        const previewVideoSrc = example.variants[0]?.video || '';
+        createThumbnailFromVideo(previewVideoSrc, canvas, card, 0.15);
+      }
+      imageWrapper.appendChild(canvas);
+      card.appendChild(imageWrapper);
+
+      const labelSpan = document.createElement('span');
+      labelSpan.textContent = example.title;
+      card.appendChild(labelSpan);
+
+      if (index !== compositionIndex) {
+        card.addEventListener('click', () => {
+          compositionIndex = index;
+          renderCompositionExample();
+          renderCompositionThumbnails();
+        });
+      }
+
+      compositionThumbnailsContainer.appendChild(card);
     });
   }
-  
+
   function cycleComposition(step) {
     compositionIndex = (compositionIndex + step + compositionExamples.length) % compositionExamples.length;
     renderCompositionExample();
-    renderCompositionDots();
+    renderCompositionThumbnails();
   }
-  
+
   compositionPrevBtn.addEventListener('click', () => cycleComposition(-1));
   compositionNextBtn.addEventListener('click', () => cycleComposition(1));
   renderCompositionExample();
-  renderCompositionDots();
+  renderCompositionThumbnails();
   
   const DEFAULT_VIDEO_SPEED = 0.9;
   const BASELINE_MODELS = [
