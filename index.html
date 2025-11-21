@@ -107,7 +107,7 @@
       overflow: hidden;
       margin: 0 auto 0.5rem;
     }
-    
+
     .video-wrapper video {
       position: absolute;
       top: 0;
@@ -118,7 +118,44 @@
       background-color: #000;
       border-radius: 4px;
     }
-    
+
+    /* Override for styles section to use natural aspect ratio */
+    .styles-section .video-wrapper {
+      height: auto;
+      padding-bottom: 0;
+    }
+
+    .styles-section .video-wrapper video {
+      position: static;
+      width: 100%;
+      height: auto;
+      display: block;
+      background-color: transparent;
+    }
+
+    /* Special styling for fairytale videos to crop black bars */
+    .fairytale-video {
+      height: auto;
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .fairytale-video video {
+      position: static;
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      background-color: transparent;
+    }
+
+    /* Separator between hillclimb and fairytale rows */
+    .fairytale-row-separator {
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      padding-top: 2rem;
+      margin-top: 1.5rem;
+    }
+
     .fine-control-section {
       text-align: center;
     }
@@ -966,9 +1003,14 @@
       .container.is-fluid {
         max-width: 100% !important;
       }
-      
+
       .video-wrapper {
         padding-bottom: 85%; /* Taller videos on larger screens */
+      }
+
+      /* Keep natural aspect ratio for styles section */
+      .styles-section .video-wrapper {
+        padding-bottom: 0;
       }
     }
     
@@ -1060,14 +1102,14 @@
       </p>
     </div> -->
     
-    <div class="example-container">
+    <div class="example-container styles-section">
       <div class="example-header section-heading-panel">
         <h2 class="title is-3" style="text-align:center; width: 100%;">Generalization to Different Styles</h2>
       </div>
       <div class="columns is-desktop is-variable is-1">
         <div class="column is-3">
           <div class="video-with-prompt">
-            <div class="video-title">Part 1</div>
+            <div class="video-title">Scene 1</div>
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part1.mp4" autoplay loop muted controls playsinline></video>
             </div>
@@ -1076,7 +1118,7 @@
         </div>
         <div class="column is-3">
           <div class="video-with-prompt">
-            <div class="video-title">Part 2</div>
+            <div class="video-title">Scene 2</div>
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part2.mp4" autoplay loop muted controls playsinline></video>
             </div>
@@ -1085,7 +1127,7 @@
         </div>
         <div class="column is-3">
           <div class="video-with-prompt">
-            <div class="video-title">Part 3</div>
+            <div class="video-title">Scene 3</div>
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part3.mp4" autoplay loop muted controls playsinline></video>
             </div>
@@ -1094,7 +1136,7 @@
         </div>
         <div class="column is-3">
           <div class="video-with-prompt">
-            <div class="video-title">Part 4</div>
+            <div class="video-title">Scene 4</div>
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part4.mp4" autoplay loop muted controls playsinline></video>
             </div>
@@ -1106,8 +1148,50 @@
         <div class="prompt-label">Prompt:</div>
         <div class="prompt-text" id="styles-prompt-text"></div>
       </div>
+      <div class="columns is-desktop is-variable is-1 fairytale-row-separator">
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <div class="video-title">Scene 4</div>
+            <div class="video-wrapper fairytale-video">
+              <video src="videos/fairytale/fairytale_part1.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="fairytale-part1" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <div class="video-title">Scene 3</div>
+            <div class="video-wrapper fairytale-video">
+              <video src="videos/fairytale/fairytale_part2.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="fairytale-part2" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <div class="video-title">Scene 2</div>
+            <div class="video-wrapper fairytale-video">
+              <video src="videos/fairytale/fairytale_part3.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="fairytale-part3" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <div class="video-title">Scene 1</div>
+            <div class="video-wrapper fairytale-video">
+              <video src="videos/fairytale/fairytale_part4.mp4" autoplay loop muted controls playsinline></video>
+            </div>
+            <button class="prompt-button" data-prompt-id="fairytale-part4" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+      </div>
+      <div id="fairytale-prompt-display" class="prompt-display">
+        <div class="prompt-label">Prompt:</div>
+        <div class="prompt-text" id="fairytale-prompt-text"></div>
+      </div>
     </div>
-    
+
     <div class="example-container fine-control-section">
       <div class="example-header section-heading-panel">
         <h2 class="title is-3" style="text-align:center; width: 100%;">Fine-Grained Control of Physical Attributes</h2>
@@ -1472,6 +1556,14 @@
     'styles-part4': 'The cartoon car is pushed by a moderate force from the engine towards the right side of the frame which makes it move closer to the home on the right while having a bumpy ride due to the stones on the floor. The car is the only thing that is moving in the video and it stops close to the house on the right. All other objects are stationary. The video accurately captures the physics of a cartoon car driving from a stationary camera viewpoint.'
   };
 
+  // Prompt data for the fairytale section
+  const fairytalePrompts = {
+    'fairytale-part1': 'Prompt text to be filled in.',
+    'fairytale-part2': 'Prompt text to be filled in.',
+    'fairytale-part3': 'Prompt text to be filled in.',
+    'fairytale-part4': 'Prompt text to be filled in.'
+  };
+
   // Function to show prompts
   function showPrompt(promptId, section) {
     let promptText = '';
@@ -1482,6 +1574,10 @@
       promptText = stylesPrompts[promptId] || 'Prompt text to be filled in.';
       displayElement = document.getElementById('styles-prompt-display');
       textElement = document.getElementById('styles-prompt-text');
+    } else if (section === 'fairytale') {
+      promptText = fairytalePrompts[promptId] || 'Prompt text to be filled in.';
+      displayElement = document.getElementById('fairytale-prompt-display');
+      textElement = document.getElementById('fairytale-prompt-text');
     } else if (section === 'finecontrol') {
       // Parse the promptId to get example index and variant index
       const parts = promptId.split('-');
@@ -1521,7 +1617,10 @@
 
   // Attach listeners for styles section (these buttons are static in the HTML)
   attachPromptButtonListeners('styles');
-  
+
+  // Attach listeners for fairytale section (these buttons are static in the HTML)
+  attachPromptButtonListeners('fairytale');
+
   const compositionExamples = [
     {
       title: 'Layered bounciness and deformation',
@@ -2892,13 +2991,6 @@
   });
 </script>
 
-<footer class="footer">
-  <div class="container is-fluid has-text-centered">
-    <p>
-      Anonymous Supplementary Material - Submission ID: 9093
-    </p>
-  </div>
-</footer>
 
 </body>
 </html>
