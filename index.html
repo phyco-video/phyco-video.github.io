@@ -639,18 +639,18 @@
     }
     
     .method-column.is-baseline.baseline-0 {
-      background: #fdf9ff;
-      border-color: rgba(192, 153, 255, 0.6);
+      background: #f8f9fa;
+      border-color: rgba(108, 117, 125, 0.4);
     }
-    
+
     .method-column.is-baseline.baseline-1 {
-      background: #f6fbff;
-      border-color: rgba(118, 191, 255, 0.6);
+      background: #f8f9fa;
+      border-color: rgba(108, 117, 125, 0.4);
     }
 
     .method-column.is-baseline.baseline-2 {
-      background: #fffaf5;
-      border-color: rgba(255, 179, 102, 0.6);
+      background: #f8f9fa;
+      border-color: rgba(108, 117, 125, 0.4);
     }
 
     .method-column.is-primary {
@@ -704,18 +704,18 @@
     }
     
     .method-column.is-baseline.baseline-0 .variant-tag {
-      background: rgba(192, 153, 255, 0.2);
-      color: #40215f;
+      background: rgba(108, 117, 125, 0.15);
+      color: #495057;
     }
-    
+
     .method-column.is-baseline.baseline-1 .variant-tag {
-      background: rgba(118, 191, 255, 0.2);
-      color: #1b3c6b;
+      background: rgba(108, 117, 125, 0.15);
+      color: #495057;
     }
 
     .method-column.is-baseline.baseline-2 .variant-tag {
-      background: rgba(255, 179, 102, 0.2);
-      color: #663d00;
+      background: rgba(108, 117, 125, 0.15);
+      color: #495057;
     }
 
     .method-column.is-primary .variant-tag {
@@ -822,8 +822,16 @@
       font-size: 0.9rem;
       font-weight: 600;
       color: #333;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .force-direction-instruction {
+      font-size: 0.85rem;
+      color: #d32f2f;
       margin-bottom: 0.75rem;
       display: block;
+      font-style: italic;
     }
 
     .force-thumbnail-container {
@@ -2575,6 +2583,11 @@
           selectorLabel.className = 'force-direction-selector-label';
           selectorLabel.textContent = 'Select Force Direction:';
           forceDirectionSelector.appendChild(selectorLabel);
+
+          const instructionText = document.createElement('span');
+          instructionText.className = 'force-direction-instruction';
+          instructionText.textContent = 'Click on the arrows to select a force direction';
+          forceDirectionSelector.appendChild(instructionText);
 
           forceThumbnailContainer = document.createElement('div');
           forceThumbnailContainer.className = 'force-thumbnail-container';
