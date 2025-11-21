@@ -685,9 +685,10 @@
     
     .method-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.25rem;
-      margin: 1rem auto 1.5rem;
+      margin: 1rem 0 1.5rem;
+      width: 100%; /* Prevent Firefox from shrinking the grid to a single column */
       max-width: 100%;
     }
 
