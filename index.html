@@ -156,6 +156,88 @@
       margin-top: 1.5rem;
     }
 
+    /* Reduce spacing for columns with arrows */
+    .styles-section .columns {
+      margin-bottom: 0 !important;
+    }
+
+    .styles-section .columns:last-of-type {
+      margin-bottom: 0.75rem !important;
+    }
+
+    .styles-section .video-with-prompt {
+      margin-bottom: 0;
+    }
+
+    /* Arrow containers for scene direction */
+    .scene-arrow-container {
+      position: relative;
+      width: 100%;
+      height: 24px;
+      margin: 0.35rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Elegant arrow line */
+    .scene-arrow-container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(74, 144, 226, 0.3) 0%,
+        rgba(74, 144, 226, 0.8) 20%,
+        rgba(74, 144, 226, 0.8) 80%,
+        rgba(74, 144, 226, 0.3) 100%);
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 1px 3px rgba(74, 144, 226, 0.2);
+    }
+
+    /* Elegant arrowhead */
+    .scene-arrow-container::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: drop-shadow(0 1px 2px rgba(74, 144, 226, 0.3));
+    }
+
+    /* Left to right arrow */
+    .scene-arrow-left-to-right::before {
+      background: linear-gradient(90deg,
+        rgba(74, 144, 226, 0.3) 0%,
+        rgba(74, 144, 226, 0.8) 20%,
+        rgba(74, 144, 226, 0.8) 80%,
+        rgba(74, 144, 226, 1) 100%);
+    }
+
+    .scene-arrow-left-to-right::after {
+      right: -1px;
+      border-width: 8px 0 8px 12px;
+      border-color: transparent transparent transparent rgba(74, 144, 226, 1);
+    }
+
+    /* Right to left arrow */
+    .scene-arrow-right-to-left::before {
+      background: linear-gradient(90deg,
+        rgba(74, 144, 226, 1) 0%,
+        rgba(74, 144, 226, 0.8) 20%,
+        rgba(74, 144, 226, 0.8) 80%,
+        rgba(74, 144, 226, 0.3) 100%);
+    }
+
+    .scene-arrow-right-to-left::after {
+      left: -1px;
+      border-width: 8px 12px 8px 0;
+      border-color: transparent rgba(74, 144, 226, 1) transparent transparent;
+    }
+
     .fine-control-section {
       text-align: center;
     }
@@ -1121,7 +1203,6 @@
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part1.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="styles-part1" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1130,7 +1211,6 @@
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part2.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="styles-part2" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1139,7 +1219,6 @@
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part3.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="styles-part3" data-section="styles">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1148,6 +1227,28 @@
             <div class="video-wrapper">
               <video src="videos/hillclimb/hill_climb_part4.mp4" autoplay loop muted controls playsinline></video>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-arrow-container scene-arrow-left-to-right"></div>
+      <div class="columns is-desktop is-variable is-1">
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="styles-part1" data-section="styles">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="styles-part2" data-section="styles">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="styles-part3" data-section="styles">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
             <button class="prompt-button" data-prompt-id="styles-part4" data-section="styles">Click for Prompt</button>
           </div>
         </div>
@@ -1163,7 +1264,6 @@
             <div class="video-wrapper fairytale-video">
               <video src="videos/fairytale/fairytale_part1.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="fairytale-part1" data-section="fairytale">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1172,7 +1272,6 @@
             <div class="video-wrapper fairytale-video">
               <video src="videos/fairytale/fairytale_part2.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="fairytale-part2" data-section="fairytale">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1181,7 +1280,6 @@
             <div class="video-wrapper fairytale-video">
               <video src="videos/fairytale/fairytale_part3.mp4" autoplay loop muted controls playsinline></video>
             </div>
-            <button class="prompt-button" data-prompt-id="fairytale-part3" data-section="fairytale">Click for Prompt</button>
           </div>
         </div>
         <div class="column is-3">
@@ -1190,6 +1288,28 @@
             <div class="video-wrapper fairytale-video">
               <video src="videos/fairytale/fairytale_part4.mp4" autoplay loop muted controls playsinline></video>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-arrow-container scene-arrow-right-to-left"></div>
+      <div class="columns is-desktop is-variable is-1">
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="fairytale-part1" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="fairytale-part2" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
+            <button class="prompt-button" data-prompt-id="fairytale-part3" data-section="fairytale">Click for Prompt</button>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="video-with-prompt">
             <button class="prompt-button" data-prompt-id="fairytale-part4" data-section="fairytale">Click for Prompt</button>
           </div>
         </div>
@@ -1560,7 +1680,7 @@
   const stylesPrompts = {
     'styles-part1': 'The cartoon car is pushed by a gentle force from the engine towards the right side of the frame which makes it descend the hill in a smooth and elegant fashion due to a very low friction coefficient. The car is the only thing that is moving in the video and it utlimately moves out of the frame as it drives by. All other objects are stationary. The video accurately captures the physics of a car going downhill from a stationary camera viewpoint.',
     'styles-part2': 'The cartoon car is pushed by a strong force from the engine towards the right side of the frame which makes it ascent the hill in a smooth and elegant fashion. The car is the only thing that is moving in the video. All other objects are stationary. The video accurately captures the physics of a car racing on a hill climb track from a stationary camera viewpoint.',
-    'styles-part3': 'The person and the cartoon car drops onto a inflatable bed that is soft and deformable, causing the bed to stretch and deform under the force from the toy cartoon car. The cartoon car then bounces back and uses this force energy to move to the right end of the frame.',
+    'styles-part3': 'The person and the cartoon car with very high bounciness is pushed by a strong force towards right side where the cartoon car drives off the cliff and then drops onto a inflatable bed. After a couple of bouncess the car uses this force to move to the right end of the frame and eventually moves out of the frame. The video clearly demonstrates the physics of the car bouncing back and using the force energy to move to the right end of the frame and eventually disappears.',
     'styles-part4': 'The cartoon car is pushed by a moderate force from the engine towards the right side of the frame which makes it move closer to the home on the right while having a bumpy ride due to the stones on the floor. The car is the only thing that is moving in the video and it stops close to the house on the right. All other objects are stationary. The video accurately captures the physics of a cartoon car driving from a stationary camera viewpoint.'
   };
 
