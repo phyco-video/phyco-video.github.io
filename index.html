@@ -714,6 +714,25 @@
       flex-direction: column;
       gap: 2rem;
     }
+
+    .property-panels.is-pending {
+      min-height: 180px;
+    }
+
+    .property-gallery-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      padding: 1.5rem;
+      border: 1px dashed rgba(49, 91, 153, 0.28);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(247, 250, 255, 0.92), rgba(238, 244, 252, 0.96));
+      color: #49607d;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
     
     .property-panel {
       border-top: 1px solid #e5e5e5;
@@ -1411,12 +1430,12 @@
             <div class="publication-venue-badge">CVPR 2026</div>
             <div class="publication-links">
               <span class="link-block">
-                <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
+                <a href="./PhyCo_CVPR2026.pdf" class="button is-normal is-project-link is-secondary" target="_blank" rel="noopener noreferrer">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
-                </button>
+                </a>
               </span>
               <span class="link-block">
                 <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
@@ -1636,7 +1655,9 @@
         <p>
         </p>
       </div> -->
-      <div id="property-panels" class="property-panels"></div>
+      <div id="property-panels" class="property-panels is-pending" aria-live="polite" aria-busy="true">
+        <div class="property-gallery-placeholder">Baseline comparisons will load automatically when this section comes into view.</div>
+      </div>
     </div>
 
     <div class="info-section" id="bibtex-section">
@@ -2869,11 +2890,17 @@
     });
   }
   
+  let propertyGalleryBuilt = false;
+
   function buildPropertyGallery() {
     const container = document.getElementById('property-panels');
-    if (!container) {
+    if (!container || propertyGalleryBuilt) {
       return;
     }
+    propertyGalleryBuilt = true;
+    container.classList.remove('is-pending');
+    container.removeAttribute('aria-busy');
+    container.innerHTML = '';
     
     propertyGalleryData.forEach(property => {
       const panel = document.createElement('div');
@@ -3405,9 +3432,43 @@
       setActiveExample(0);
     });
   }
+
+  function initLazyPropertyGallery() {
+    const container = document.getElementById('property-panels');
+    const gallerySection = document.querySelector('.property-gallery');
+    if (!container || !gallerySection || propertyGalleryBuilt) {
+      return;
+    }
+
+    const buildWhenReady = () => {
+      if (propertyGalleryBuilt) {
+        return;
+      }
+      buildPropertyGallery();
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      buildWhenReady();
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        observer.disconnect();
+        buildWhenReady();
+      });
+    }, {
+      rootMargin: '300px 0px'
+    });
+
+    observer.observe(gallerySection);
+  }
   
   document.addEventListener('DOMContentLoaded', function() {
-    buildPropertyGallery();
+    initLazyPropertyGallery();
     
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(video => {
