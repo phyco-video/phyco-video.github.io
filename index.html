@@ -15,42 +15,193 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     html, body {
-      height: 100%;
+      min-height: 100%;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
+      background: linear-gradient(180deg, #f6f8fc 0%, #edf3fb 42%, #f8fafc 100%);
+    }
+
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      color: #1b263b;
     }
     
     .publication-title {
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 500;
+      font-family: 'Castoro', serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: #10213b;
+      margin-bottom: 1rem !important;
+    }
+
+    .title-gradient {
+      background: linear-gradient(135deg, #2f5f9d 0%, #5f8fd1 45%, #8a66c9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
     }
     
     .hero {
-      background-color: #f5f5f5;
-      padding: 1rem 0;
+      background: transparent;
+      padding: 2rem 0 1rem;
+    }
+
+    .hero-body {
+      padding: 1rem 0 0.5rem;
     }
     
     .section {
-      padding: 1.5rem 0.5rem;
+      padding: 1.5rem 0.5rem 2rem;
     }
     
     .site-content {
-      width: 90%;
+      width: min(94%, 1380px);
       margin: 0 auto;
     }
     
     .container.is-fluid {
-      padding: 0 0.5rem;
+      padding: 0 0.75rem;
+    }
+
+    .hero-card {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.25rem, 2.6vw, 3rem);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+      border: 1px solid rgba(58, 92, 138, 0.14);
+      box-shadow: 0 18px 45px rgba(25, 47, 89, 0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-kicker {
+      margin: 0 0 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #4f74a6;
+    }
+
+    .publication-authors {
+      max-width: 920px;
+      margin: 0 auto 0.85rem;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #273852;
+    }
+
+    .author-name {
+      font-weight: 600;
+    }
+
+    .author-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .author-link:hover {
+      color: #315b99;
+      border-color: rgba(49, 91, 153, 0.35);
+    }
+
+    .author-divider {
+      display: inline-block;
+      margin: 0 0.55rem;
+      color: #7f8ba0;
+    }
+
+    .publication-affiliations {
+      max-width: 920px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #53657e;
+    }
+
+    .publication-venue-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.35rem;
+      padding: 0.48rem 1rem;
+      border-radius: 999px;
+      background: rgba(49, 91, 153, 0.1);
+      border: 1px solid rgba(49, 91, 153, 0.16);
+      color: #234876;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .publication-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .link-block {
+      display: inline-flex;
+    }
+
+    .button.is-project-link {
+      min-height: 3rem;
+      padding: 0 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #315b99, #4a80c8);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(49, 91, 153, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button.is-project-link:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(49, 91, 153, 0.26);
+    }
+
+    .button.is-project-link.is-secondary {
+      background: linear-gradient(135deg, #eef4ff, #dbe7fb);
+      color: #173760;
+      border: 1px solid rgba(49, 91, 153, 0.18);
+      box-shadow: none;
+    }
+
+    .button.is-project-link.is-secondary:hover {
+      color: #173760;
+    }
+
+    .button.is-project-link.is-disabled,
+    .button.is-project-link.is-disabled:hover {
+      background: #edf1f7;
+      color: #8a95a6;
+      border: 1px solid rgba(122, 136, 158, 0.2);
+      box-shadow: none;
+      transform: none;
+      cursor: not-allowed;
+      pointer-events: none;
     }
     
     .example-container {
       margin-bottom: 2rem;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(20, 39, 73, 0.09);
+      border: 1px solid rgba(74, 107, 156, 0.12);
+      padding: 1.2rem;
     }
     
     .example-header {
@@ -58,17 +209,18 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.85rem;
     }
     
     .explanation-text {
-      background-color: #f8f9fa;
+      background: linear-gradient(145deg, #f7faff, #f2f6fb);
+      border: 1px solid rgba(74, 107, 156, 0.1);
       padding: 0.75rem;
-      border-radius: 6px;
+      border-radius: 12px;
       margin: 0.05rem 0 0.05rem 0;
       font-size: 0.95rem;
-      line-height: 1.4;
-      /* border-left: 4px solid #3273dc; */
+      line-height: 1.55;
+      color: #3c4b63;
     }
     
     .video-container {
@@ -88,6 +240,7 @@
       margin-bottom: 0.25rem;
       text-align: center;
       font-size: 0.9rem;
+      color: #243956;
     }
     
     .column-heading {
@@ -95,7 +248,7 @@
       font-size: 1.1rem;
       margin: 0.5rem 0;
       text-align: center;
-      color: #3273dc;
+      color: #315b99;
     }
     
     .video-wrapper {
@@ -255,7 +408,6 @@
     .section-heading-panel .title {
       color: #1d4f91;
       letter-spacing: 0.04em;
-      /* text-transform: uppercase; */
     }
     
     .fine-control-carousel {
@@ -498,10 +650,44 @@
     }
     
     .abstract {
-      background-color: #f9f9f9;
-      padding: 1rem;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(74, 107, 156, 0.12);
+      padding: 1.25rem;
+      border-radius: 20px;
       margin-bottom: 1.5rem;
+      box-shadow: 0 12px 28px rgba(20, 39, 73, 0.08);
+    }
+
+    .info-section {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(74, 107, 156, 0.12);
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(20, 39, 73, 0.09);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-section .section-title {
+      display: block;
+      margin-bottom: 1rem !important;
+      color: #10213b;
+    }
+
+    .section-body {
+      margin: 0;
+      color: #42546b;
+      line-height: 1.75;
+    }
+
+    .bibtex-code {
+      margin: 0;
+      padding: 1.15rem 1.25rem;
+      border-radius: 16px;
+      background: #0f1b32;
+      color: #eef4ff;
+      overflow-x: auto;
+      font-size: 0.92rem;
+      line-height: 1.55;
     }
     
     .footer {
@@ -1107,6 +1293,42 @@
     
     /* Fix for mobile */
     @media screen and (max-width: 768px) {
+      .hero {
+        padding-top: 1rem;
+      }
+
+      .hero-card {
+        padding: 1.5rem 1rem;
+        border-radius: 22px;
+      }
+
+      .publication-title {
+        font-size: 2.05rem !important;
+      }
+
+      .publication-authors,
+      .publication-affiliations {
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+
+      .author-divider {
+        margin: 0 0.3rem;
+      }
+
+      .link-block {
+        width: 100%;
+      }
+
+      .button.is-project-link {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .site-content {
+        width: 96%;
+      }
+
       .columns.is-mobile {
         display: block;
       }
@@ -1153,6 +1375,11 @@
       .property-extra {
         max-width: 80%;
       }
+
+      .info-section {
+        padding: 1.25rem 1rem;
+        border-radius: 18px;
+      }
     }
   </style>
 </head>
@@ -1162,20 +1389,67 @@
   <div class="hero-body">
     <div class="container is-fluid">
       <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">PhyCo: Learning Controllable Physical Priors for Generative Motion</h1>
-          
-          <div class="column has-text-centered">
+        <div class="column is-10-widescreen is-11-desktop has-text-centered">
+          <div class="hero-card">
+            <h1 class="title is-1 publication-title"><span class="title-gradient">PhyCo</span>: Learning Controllable Physical Priors for Generative Motion</h1>
+            <p class="publication-authors">
+              <span class="author-name"><a class="author-link" href="http://nnsriram97.github.io/" target="_blank" rel="noopener noreferrer">Sriram Narayanan<sup>1,2</sup></a></span>
+              <span class="author-divider">&middot;</span>
+              <span class="author-name"><a class="author-link" href="https://geekjzy.github.io/" target="_blank" rel="noopener noreferrer">Ziyu Jiang<sup>2</sup></a></span>
+              <span class="author-divider">&middot;</span>
+              <span class="author-name"><a class="author-link" href="https://www.cs.cmu.edu/~srinivas/" target="_blank" rel="noopener noreferrer">Srinivasa G. Narasimhan<sup>1</sup></a></span>
+              <span class="author-divider">&middot;</span>
+              <span class="author-name"><a class="author-link" href="https://cseweb.ucsd.edu/~mkchandraker/" target="_blank" rel="noopener noreferrer">Manmohan Chandraker<sup>2,3</sup></a></span>
+            </p>
+            <p class="publication-affiliations">
+              <span><sup>1</sup> Carnegie Mellon University</span>
+              <span class="author-divider">&middot;</span>
+              <span><sup>2</sup> NEC Labs America</span>
+              <span class="author-divider">&middot;</span>
+              <span><sup>3</sup> UC San Diego</span>
+            </p>
+            <div class="publication-venue-badge">CVPR 2026</div>
             <div class="publication-links">
-              <!-- PDF Link. -->
-                <span class="link-block">
-                <a href="./appendix.pdf" target="_blank" class="button is-normal is-rounded is-dark">
+              <span class="link-block">
+                <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Supplementary PDF</span>
+                  <span>Paper</span>
+                </button>
+              </span>
+              <span class="link-block">
+                <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
+                  <span class="icon">
+                    <i class="fas fa-box-archive"></i>
+                  </span>
+                  <span>arXiv</span>
+                </button>
+              </span>
+              <span class="link-block">
+                <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
+                  <span class="icon">
+                    <i class="fas fa-code"></i>
+                  </span>
+                  <span>Code</span>
+                </button>
+              </span>
+              <span class="link-block">
+                <button type="button" class="button is-normal is-project-link is-disabled" disabled aria-disabled="true">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </button>
+              </span>
+              <span class="link-block">
+                <a href="#bibtex-section" class="button is-normal is-project-link is-secondary">
+                  <span class="icon">
+                    <i class="fas fa-quote-right"></i>
+                  </span>
+                  <span>BibTeX</span>
                 </a>
-                </span>
+              </span>
             </div>
           </div>
         </div>
@@ -1363,6 +1637,23 @@
         </p>
       </div> -->
       <div id="property-panels" class="property-panels"></div>
+    </div>
+
+    <div class="info-section" id="bibtex-section">
+      <h2 class="title is-3 section-title">BibTeX</h2>
+      <pre class="bibtex-code"><code>@misc{narayanan2026phyco,
+  title = {PhyCo: Learning Controllable Physical Priors for Generative Motion},
+  author = {Narayanan, Sriram and Jiang, Ziyu and Narasimhan, Srinivasa G. and Chandraker, Manmohan},
+  year = {2026},
+  note = {Project page citation. Update with final publication venue and links.}
+}</code></pre>
+    </div>
+
+    <div class="info-section" id="acknowledgements-section">
+      <h2 class="title is-3 section-title">Acknowledgements</h2>
+      <p class="section-body">
+        This work was partially conducted during Sriram's internship at NEC Labs America, and was supported in part by NSF grants IIS-2107236 and IIS-2513219. We also thank Kausik Sivakumar and Yug Ajmera for their insightful discussions.
+      </p>
     </div>
   </div>
 </section>
