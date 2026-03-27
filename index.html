@@ -709,11 +709,70 @@
     .property-gallery .example-header {
       margin-bottom: 1rem;
     }
+
+    .property-gallery-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .property-gallery-trigger-copy {
+      flex: 1 1 auto;
+    }
+
+    .property-gallery-trigger-title {
+      display: block;
+      width: 100%;
+      margin: 0;
+      text-align: center;
+    }
+
+    .property-gallery-trigger-subtitle {
+      margin-top: 0.45rem;
+      text-align: center;
+      color: #49607d;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .property-gallery-trigger-icon {
+      flex: 0 0 auto;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(49, 91, 153, 0.12);
+      color: #315b99;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .property-gallery-trigger:hover .property-gallery-trigger-icon {
+      transform: translateY(1px);
+      background: rgba(49, 91, 153, 0.18);
+    }
+
+    .property-gallery.is-open .property-gallery-trigger-icon {
+      transform: rotate(90deg);
+      background: rgba(49, 91, 153, 0.18);
+    }
     
     .property-panels {
       display: flex;
       flex-direction: column;
       gap: 2rem;
+    }
+
+    .property-panels.is-collapsed {
+      display: none;
     }
 
     .property-panels.is-pending {
@@ -1650,14 +1709,22 @@
     
     <div class="example-container property-gallery">
       <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">More Results with Baseline Comparisons</h2>
+        <button type="button" class="property-gallery-trigger" id="property-gallery-trigger" aria-controls="property-panels" aria-expanded="false">
+          <div class="property-gallery-trigger-copy">
+            <h2 class="title is-3 property-gallery-trigger-title">More Results with Baseline Comparisons</h2>
+            <p class="property-gallery-trigger-subtitle">Click here to view more results with baseline comparisons.</p>
+          </div>
+          <span class="property-gallery-trigger-icon" aria-hidden="true">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+        </button>
       </div>
       <!-- <div class="explanation-text">
         <p>
         </p>
       </div> -->
-      <div id="property-panels" class="property-panels is-pending" aria-live="polite" aria-busy="true">
-        <div class="property-gallery-placeholder">Baseline comparisons will load automatically when this section comes into view.</div>
+      <div id="property-panels" class="property-panels is-pending is-collapsed" aria-live="polite" aria-busy="true" aria-hidden="true">
+        <div class="property-gallery-placeholder">Baseline comparisons will be loaded only after you click the section header above.</div>
       </div>
     </div>
 
@@ -3433,42 +3500,36 @@
     });
   }
 
-  function initLazyPropertyGallery() {
+  function initPropertyGalleryDisclosure() {
     const container = document.getElementById('property-panels');
     const gallerySection = document.querySelector('.property-gallery');
-    if (!container || !gallerySection || propertyGalleryBuilt) {
+    const trigger = document.getElementById('property-gallery-trigger');
+    if (!container || !gallerySection || !trigger) {
       return;
     }
 
-    const buildWhenReady = () => {
-      if (propertyGalleryBuilt) {
-        return;
+    const setGalleryOpen = (isOpen) => {
+      gallerySection.classList.toggle('is-open', isOpen);
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      container.classList.toggle('is-collapsed', !isOpen);
+      if (isOpen) {
+        container.removeAttribute('aria-hidden');
+      } else {
+        container.setAttribute('aria-hidden', 'true');
       }
-      buildPropertyGallery();
     };
 
-    if (!('IntersectionObserver' in window)) {
-      buildWhenReady();
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-        observer.disconnect();
-        buildWhenReady();
-      });
-    }, {
-      rootMargin: '300px 0px'
+    trigger.addEventListener('click', () => {
+      const shouldOpen = container.classList.contains('is-collapsed');
+      setGalleryOpen(shouldOpen);
+      if (shouldOpen && !propertyGalleryBuilt) {
+        buildPropertyGallery();
+      }
     });
-
-    observer.observe(gallerySection);
   }
   
   document.addEventListener('DOMContentLoaded', function() {
-    initLazyPropertyGallery();
+    initPropertyGalleryDisclosure();
     
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(video => {
