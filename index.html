@@ -7,7 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PhyCo: Learning Controllable Physical Priors for Generative Motion</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css">
@@ -28,21 +30,21 @@
     }
 
     body {
-      font-family: 'Noto Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       color: #1b263b;
     }
     
     .publication-title {
-      font-family: 'Castoro', serif;
-      font-weight: 400;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       color: #10213b;
       margin-bottom: 1rem !important;
     }
 
     .title-gradient {
-      background: linear-gradient(135deg, #2f5f9d 0%, #5f8fd1 45%, #8a66c9 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 45%, #06b6d4 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -51,7 +53,12 @@
     
     .hero {
       background: transparent;
-      padding: 2rem 0 1rem;
+      padding: 2rem 0 0;
+    }
+
+    .hero-body > .container.is-fluid {
+      width: min(94%, 1380px);
+      margin: 0 auto;
     }
 
     .hero-body {
@@ -72,9 +79,8 @@
     }
 
     .hero-card {
-      max-width: 1120px;
       margin: 0 auto;
-      padding: 2.5rem clamp(1.25rem, 2.6vw, 3rem);
+      padding: 2.5rem clamp(2rem, 5vw, 6rem) 1.5rem;
       border-radius: 28px;
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
       border: 1px solid rgba(58, 92, 138, 0.14);
@@ -92,9 +98,10 @@
     }
 
     .publication-authors {
+      font-family: 'Inter', sans-serif;
       max-width: 920px;
       margin: 0 auto 0.85rem;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       line-height: 1.8;
       color: #273852;
     }
@@ -122,14 +129,16 @@
     }
 
     .publication-affiliations {
+      font-family: 'Inter', sans-serif;
       max-width: 920px;
       margin: 0 auto 1.5rem;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       line-height: 1.8;
       color: #53657e;
     }
 
     .publication-venue-badge {
+      font-family: 'Space Grotesk', sans-serif;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -619,6 +628,10 @@
     }
     
     .title.is-3 {
+      /* Default font seems good enough */
+      /* font-family: 'Space Grotesk', sans-serif; */
+      /* font-family: 'Inter', sans-serif; */
+      font-weight: 700;
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
       display: inline-block;
@@ -1460,6 +1473,141 @@
         border-radius: 18px;
       }
     }
+
+    /* TL;DR — integrated into hero card */
+    .hero-tldr {
+      max-width: 780px;
+      margin: 1.4rem auto 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(58, 92, 138, 0.10);
+      text-align: center;
+    }
+
+    .hero-tldr-label {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-tldr-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #3c4f6a;
+      margin: 0;
+    }
+
+    /* Pipeline / How it works */
+    .pipeline-section {
+      width: min(94%, 1380px);
+      margin: 0 auto;
+      padding: 1.5rem 0.75rem 0.5rem;
+    }
+
+    .pipeline-card {
+      margin: 0 auto;
+      padding: 2rem clamp(2rem, 5vw, 6rem);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(58, 92, 138, 0.11);
+      box-shadow: 0 12px 34px rgba(25, 47, 89, 0.08);
+    }
+
+    .pipeline-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: #10213b;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.3rem;
+      text-align: center;
+    }
+
+    .pipeline-subheading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #53657e;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .pipeline-figure {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(58, 92, 138, 0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .pipeline-figure img {
+      width: 100%;
+      display: block;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .pillar {
+      padding: 1.1rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(58, 92, 138, 0.09);
+      background: linear-gradient(145deg, #f8faff, #f1f5fb);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pillar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(25, 47, 89, 0.08);
+    }
+
+    .pillar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .pillar-icon.icon-data    { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+    .pillar-icon.icon-control { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
+    .pillar-icon.icon-vlm     { background: rgba(6, 182, 160, 0.12); color: #0d9488; }
+
+    .pillar h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #10213b;
+      margin: 0 0 0.3rem;
+    }
+
+    .pillar p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #53657e;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .pillars {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1468,7 +1616,7 @@
   <div class="hero-body">
     <div class="container is-fluid">
       <div class="columns is-centered">
-        <div class="column is-10-widescreen is-11-desktop has-text-centered">
+        <div class="column is-12 has-text-centered">
           <div class="hero-card">
             <h1 class="title is-1 publication-title"><span class="title-gradient">PhyCo</span>: Learning Controllable Physical Priors for Generative Motion</h1>
             <p class="publication-authors">
@@ -1530,6 +1678,15 @@
                 </a>
               </span>
             </div>
+
+            <div class="hero-tldr">
+              <span class="hero-tldr-label">TL;DR</span>
+              <p class="hero-tldr-text">
+                <strong>PhyCo</strong> learns controllable physical priors &mdash; friction, restitution, deformation, and force &mdash;
+                from simple block-sliding and ball-bouncing simulations, enabling physically grounded and continuously controllable
+                video generation <em>without any simulator at inference</em>.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1537,14 +1694,74 @@
   </div>
 </section>
 
+<div class="pipeline-section">
+  <div class="pipeline-card">
+    <!-- <h2 class="pipeline-heading">How PhyCo Works</h2> -->
+    <div class="example-header section-heading-panel">
+      <h2 class="title is-3" style="text-align:center; width: 100%;">How PhyCo Works</h2>
+    </div>
+    <p class="pipeline-subheading">
+      A two-stage pipeline: physics-supervised ControlNet fine-tuning on simulation data,
+      followed by VLM-guided reward optimization for physical consistency.
+    </p>
+    <div class="pipeline-figure">
+      <img src="static/images/pipeline.jpg" alt="PhyCo two-stage pipeline: ControlNet physics fine-tuning followed by VLM reward alignment" loading="lazy">
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon icon-data"><i class="fas fa-database"></i></div>
+        <h4>100K+ Simulation Videos</h4>
+        <p>Photorealistic block-sliding, ball-bouncing, and collision videos rendered with Kubric &amp; PyBullet, with systematically varied physical properties.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon icon-control"><i class="fas fa-sliders"></i></div>
+        <h4>Physics-Supervised ControlNet</h4>
+        <p>A ControlNet conditioned on pixel-aligned physical property maps is trained on top of a frozen Cosmos-Predict2 video diffusion backbone.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon icon-vlm"><i class="fas fa-brain"></i></div>
+        <h4>VLM-Guided Reward</h4>
+        <p>A fine-tuned Qwen2.5-VL evaluates generated videos with targeted physics questions, providing differentiable feedback to improve consistency.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="section site-content">
   <div class="container is-fluid">
-    <!-- Abstract Section -->
-    <!-- <div class="abstract">
-      <h2 class="title is-4">Abstract</h2>
-      <p>
-      </p>
-    </div> -->
+
+    <div class="example-container fine-control-section">
+      <div class="example-header section-heading-panel">
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Fine-Grained Control of Physical Attributes</h2>
+      </div>
+      <div class="fine-control-content" id="fine-control-content"></div>
+      <div class="property-carousel-wrapper">
+        <div class="property-carousel-nav">
+          <button class="fine-control-nav" id="fine-control-prev" aria-label="Previous example">&lsaquo;</button>
+          <div class="property-nav-track">
+            <div class="thumbnail-track" id="fine-control-thumbnails"></div>
+          </div>
+          <button class="fine-control-nav" id="fine-control-next" aria-label="Next example">&rsaquo;</button>
+        </div>
+        <div class="fine-control-dots" id="fine-control-dots"></div>
+      </div>
+    </div>
+    
+    <div class="example-container composition-section">
+      <div class="example-header section-heading-panel">
+        <h2 class="title is-3" style="text-align:center; width: 100%;">Compositionality of Physical Attributes</h2>
+      </div>
+      <div class="fine-control-carousel">
+        <div class="fine-control-content" id="composition-content"></div>
+      </div>
+      <div class="property-carousel-nav">
+        <button class="fine-control-nav" id="composition-prev" aria-label="Previous example">&lsaquo;</button>
+        <div class="property-nav-track">
+          <div class="thumbnail-track" id="composition-thumbnails"></div>
+        </div>
+        <button class="fine-control-nav" id="composition-next" aria-label="Next example">&rsaquo;</button>
+      </div>
+    </div>
     
     <div class="example-container styles-section">
       <div class="example-header section-heading-panel">
@@ -1674,39 +1891,6 @@
       </div>
     </div>
 
-    <div class="example-container fine-control-section">
-      <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">Fine-Grained Control of Physical Attributes</h2>
-      </div>
-      <div class="fine-control-content" id="fine-control-content"></div>
-      <div class="property-carousel-wrapper">
-        <div class="property-carousel-nav">
-          <button class="fine-control-nav" id="fine-control-prev" aria-label="Previous example">&lsaquo;</button>
-          <div class="property-nav-track">
-            <div class="thumbnail-track" id="fine-control-thumbnails"></div>
-          </div>
-          <button class="fine-control-nav" id="fine-control-next" aria-label="Next example">&rsaquo;</button>
-        </div>
-        <div class="fine-control-dots" id="fine-control-dots"></div>
-      </div>
-    </div>
-    
-    <div class="example-container composition-section">
-      <div class="example-header section-heading-panel">
-        <h2 class="title is-3" style="text-align:center; width: 100%;">Compositionality of Physical Attributes</h2>
-      </div>
-      <div class="fine-control-carousel">
-        <div class="fine-control-content" id="composition-content"></div>
-      </div>
-      <div class="property-carousel-nav">
-        <button class="fine-control-nav" id="composition-prev" aria-label="Previous example">&lsaquo;</button>
-        <div class="property-nav-track">
-          <div class="thumbnail-track" id="composition-thumbnails"></div>
-        </div>
-        <button class="fine-control-nav" id="composition-next" aria-label="Next example">&rsaquo;</button>
-      </div>
-    </div>
-    
     <div class="example-container property-gallery">
       <div class="example-header section-heading-panel">
         <button type="button" class="property-gallery-trigger" id="property-gallery-trigger" aria-controls="property-panels" aria-expanded="false">
